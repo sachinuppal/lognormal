@@ -1,0 +1,50 @@
+[
+  {
+    "Name": "Mayank Pachauri",
+    "Role": "Founder, CEO",
+    "Image URL": "https://d6jocfs79qs7r.cloudfront.net/website/teams/1-Mayank.png",
+    "LinkedIn": "https://www.linkedin.com/in/mayank-pachauri-abb8717/"
+  },
+  {
+    "Name": "Prashanth Reddy",
+    "Role": "COO",
+    "Image URL": "https://d6jocfs79qs7r.cloudfront.net/website/teams/2-Prashanth.png",
+    "LinkedIn": "https://www.linkedin.com/in/prashanthracharla/"
+  },
+  {
+    "Name": "Vamsi Chandra",
+    "Role": "SVP, Product",
+    "Image URL": "https://d6jocfs79qs7r.cloudfront.net/website/teams/3-Vamsi.png",
+    "LinkedIn": "https://www.linkedin.com/in/vamsi-chandra/"
+  },
+  {
+    "Name": "Nikhil Reddy",
+    "Role": "VP, Data Engg. & Data Science",
+    "Image URL": "https://d6jocfs79qs7r.cloudfront.net/website/teams/4-Nikhil.png",
+    "LinkedIn": "https://www.linkedin.com/in/b-nikhileshwar-reddy-516a17110/"
+  },
+  {
+    "Name": "Srinivas Rao",
+    "Role": "VP, Client Services",
+    "Image URL": "https://d6jocfs79qs7r.cloudfront.net/website/teams/5-Srini.png",
+    "LinkedIn": "https://www.linkedin.com/in/athotasrini/"
+  },
+  {
+    "Name": "Tarun Tiwari",
+    "Role": "Chief Data Architect",
+    "Image URL": "https://d6jocfs79qs7r.cloudfront.net/website/teams/6-Tarun.png",
+    "LinkedIn": "https://www.linkedin.com/in/tarun-tiwari-4974a61a6/"
+  },
+  {
+    "Name": "Piyusha Jain",
+    "Role": "VP, Data Analytics",
+    "Image URL": "https://d6jocfs79qs7r.cloudfront.net/website/teams/7-Piyusha.png",
+    "LinkedIn": "https://www.linkedin.com/in/piyusha-jain-9b3696a2/"
+  },
+  {
+    "Name": "Jeffrey Haas",
+    "Role": "Advisory Board Member",
+    "Image URL": "https://d6jocfs79qs7r.cloudfront.net/website/teams/8-JeffreyHaas.png",
+    "LinkedIn": "https://www.linkedin.com/in/jeffreyhaas/"
+  }
+]
