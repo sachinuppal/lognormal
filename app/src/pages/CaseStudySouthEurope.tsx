@@ -1,14 +1,16 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Target, TrendingUp, Zap, ArrowRight } from 'lucide-react';
 import Navigation from '../sections/Navigation';
 import Footer from '../sections/Footer';
+import CalendlyModal from '../components/CalendlyModal';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const CaseStudySouthEurope = () => {
   const sectionRef = useRef<HTMLElement>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     // Scroll to top on mount
@@ -19,7 +21,7 @@ const CaseStudySouthEurope = () => {
       gsap.set('.stat-card', { opacity: 1, y: 0 });
       gsap.set('.challenge-card', { opacity: 1, y: 0 });
       gsap.set('.solution-item', { opacity: 1, x: 0 });
-      
+
       gsap.from('.hero-content', {
         opacity: 0,
         y: 40,
@@ -101,20 +103,20 @@ const CaseStudySouthEurope = () => {
   return (
     <div className="relative min-h-screen bg-[#0a0a0f] text-white overflow-x-hidden">
       <Navigation />
-      
+
       <main ref={sectionRef} className="pt-20">
         {/* Hero Section */}
         <section className="relative py-20 overflow-hidden">
           <div className="absolute inset-0 dot-grid opacity-20" />
           <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0f] via-transparent to-[#0a0a0f]" />
-          
+
           <div className="relative z-10 max-w-5xl mx-auto px-6 hero-content">
             <div className="flex flex-wrap items-center gap-2 mb-6">
               <span className="font-mono text-xs text-[#00f0ff] tracking-wider">[CASE STUDY]</span>
               <span className="text-gray-600">|</span>
               <span className="font-mono text-xs text-gray-400">SOUTH EUROPE</span>
             </div>
-            
+
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
               Leading iGaming Brands
               <br />
@@ -122,9 +124,9 @@ const CaseStudySouthEurope = () => {
                 Optimize Campaigns with AI-Powered Insights
               </span>
             </h1>
-            
+
             <p className="text-gray-400 text-lg max-w-3xl mb-8">
-              How three leading iGaming brands in South Europe transformed their marketing campaigns 
+              How three leading iGaming brands in South Europe transformed their marketing campaigns
               through AI-driven decision intelligence and real-time analytics.
             </p>
 
@@ -159,9 +161,9 @@ const CaseStudySouthEurope = () => {
                 The <span className="text-[#ff4444]">Challenge</span>
               </h2>
               <p className="text-gray-400 mb-6">
-                Managing multiple iGaming brands across South Europe, the client struggled with 
-                campaign optimization. Each brand had different player profiles, and manual campaign 
-                management was inefficient and time-consuming. They needed AI-powered insights to 
+                Managing multiple iGaming brands across South Europe, the client struggled with
+                campaign optimization. Each brand had different player profiles, and manual campaign
+                management was inefficient and time-consuming. They needed AI-powered insights to
                 maximize marketing ROI.
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -183,10 +185,10 @@ const CaseStudySouthEurope = () => {
               The <span className="text-[#00f0ff]">Solution</span>
             </h2>
             <p className="text-gray-400 mb-8">
-              FalconDive implemented AI-powered campaign analytics that transformed how the client 
+              FalconDive implemented AI-powered campaign analytics that transformed how the client
               approached marketing optimization across all their brands.
             </p>
-            
+
             <div className="space-y-4">
               {solutions.map((solution, i) => (
                 <div key={i} className="solution-item bg-[#1a1a24] border border-gray-800 p-5 rounded-xl hover:border-[#00f0ff]/30 transition-all" style={{ opacity: 1 }}>
@@ -211,7 +213,7 @@ const CaseStudySouthEurope = () => {
             <h2 className="font-display text-2xl font-bold mb-8">
               The <span className="text-green-400">Results</span>
             </h2>
-            
+
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {results.map((result, i) => (
                 <div key={i} className="bg-gradient-to-br from-[#1a1a24] to-[#0f0f14] border border-gray-800 p-6 rounded-xl">
@@ -229,8 +231,8 @@ const CaseStudySouthEurope = () => {
           <div className="max-w-3xl mx-auto px-6">
             <div className="bg-[#1a1a24] border border-gray-800 p-8 rounded-2xl">
               <p className="text-xl italic text-gray-300 mb-6">
-                "FalconDive's AI-powered insights have completely transformed our approach to campaign 
-                optimization. We're now making data-driven decisions in real-time, and the results speak 
+                "FalconDive's AI-powered insights have completely transformed our approach to campaign
+                optimization. We're now making data-driven decisions in real-time, and the results speak
                 for themselves."
               </p>
               <div className="flex items-center gap-3">
@@ -255,15 +257,19 @@ const CaseStudySouthEurope = () => {
             <p className="text-gray-400 mb-8">
               See how FalconDive's AI-powered insights can transform your marketing ROI.
             </p>
-            <button className="group relative px-8 py-4 bg-[#00f0ff] text-black font-mono font-bold tracking-wider rounded-lg hover:scale-105 transition-transform flex items-center gap-2 mx-auto">
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="group relative px-8 py-4 bg-[#00f0ff] text-black font-mono font-bold tracking-wider rounded-lg hover:scale-105 transition-transform flex items-center gap-2 mx-auto"
+            >
               <span>Request Demo</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
         </section>
       </main>
-      
+
       <Footer />
+      <CalendlyModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
   );
 };

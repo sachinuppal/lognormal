@@ -1,14 +1,16 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { TrendingUp, BarChart3, Clock, ArrowRight } from 'lucide-react';
 import Navigation from '../sections/Navigation';
 import Footer from '../sections/Footer';
+import CalendlyModal from '../components/CalendlyModal';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const CaseStudyCEE = () => {
   const sectionRef = useRef<HTMLElement>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     // Scroll to top on mount
@@ -21,7 +23,7 @@ const CaseStudyCEE = () => {
       gsap.set('.challenge-item', { opacity: 1, x: 0 });
       gsap.set('.solution-item', { opacity: 1, x: 0 });
       gsap.set('.result-card', { opacity: 1, y: 0 });
-      
+
       gsap.from('.hero-content', {
         opacity: 0,
         y: 40,
@@ -130,20 +132,20 @@ const CaseStudyCEE = () => {
   return (
     <div className="relative min-h-screen bg-[#0a0a0f] text-white overflow-x-hidden">
       <Navigation />
-      
+
       <main ref={sectionRef} className="pt-20">
         {/* Hero Section */}
         <section className="relative py-20 overflow-hidden">
           <div className="absolute inset-0 dot-grid opacity-20" />
           <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0f] via-transparent to-[#0a0a0f]" />
-          
+
           <div className="relative z-10 max-w-5xl mx-auto px-6 hero-content text-center">
             <div className="mb-6">
               <span className="font-mono text-xs text-[#00f0ff] tracking-wider">iGaming Giant</span>
               <span className="text-gray-600 mx-2">|</span>
               <span className="font-mono text-xs text-gray-400">CEE</span>
             </div>
-            
+
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
               iGaming Giant in CEE Drives €45 Million
               <br />
@@ -180,11 +182,11 @@ const CaseStudyCEE = () => {
             </h2>
             <div className="about-card bg-[#1a1a24] border border-gray-800 p-8 rounded-2xl" style={{ opacity: 1 }}>
               <p className="text-gray-400 leading-relaxed">
-                Established in 1990 in Prague, it has become one of the first-ever joint-stock companies in the 
-                country's modern history. It is providing innovative world-class entertainment in betting and 
-                gaming across multiple product verticals like Sports Betting, Online Casinos, Lotteries, Virtual 
-                Sports, and Slot Machines. The group employs a workforce of more than 6,000 and their footprint 
-                now extends to the Slovakian, Polish, Romanian, and Croatian markets. The company has an estimated 
+                Established in 1990 in Prague, it has become one of the first-ever joint-stock companies in the
+                country's modern history. It is providing innovative world-class entertainment in betting and
+                gaming across multiple product verticals like Sports Betting, Online Casinos, Lotteries, Virtual
+                Sports, and Slot Machines. The group employs a workforce of more than 6,000 and their footprint
+                now extends to the Slovakian, Polish, Romanian, and Croatian markets. The company has an estimated
                 annual revenue of €500 million.
               </p>
             </div>
@@ -232,7 +234,7 @@ const CaseStudyCEE = () => {
               <span className="text-[#00f0ff]">Results</span>
             </h2>
             <p className="text-gray-400 text-center mb-10 max-w-2xl mx-auto">
-              FalconDive empowered data-driven decision making faster and more cost-effectively, 
+              FalconDive empowered data-driven decision making faster and more cost-effectively,
               unlocking significant revenue growth.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -252,15 +254,19 @@ const CaseStudyCEE = () => {
             <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
               Turn Success Stories Into Your Reality.
             </h2>
-            <button className="group relative px-8 py-4 bg-[#00f0ff] text-black font-mono font-bold tracking-wider rounded-lg hover:scale-105 transition-transform flex items-center gap-2 mx-auto mt-8">
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="group relative px-8 py-4 bg-[#00f0ff] text-black font-mono font-bold tracking-wider rounded-lg hover:scale-105 transition-transform flex items-center gap-2 mx-auto mt-8"
+            >
               <span>Request Demo</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
         </section>
       </main>
-      
+
       <Footer />
+      <CalendlyModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
   );
 };

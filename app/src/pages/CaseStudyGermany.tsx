@@ -1,14 +1,16 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Clock, TrendingUp, BarChart3, ArrowRight } from 'lucide-react';
 import Navigation from '../sections/Navigation';
 import Footer from '../sections/Footer';
+import CalendlyModal from '../components/CalendlyModal';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const CaseStudyGermany = () => {
   const sectionRef = useRef<HTMLElement>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     // Scroll to top on mount
@@ -19,7 +21,7 @@ const CaseStudyGermany = () => {
       gsap.set('.stat-card', { opacity: 1, y: 0 });
       gsap.set('.challenge-card', { opacity: 1, y: 0 });
       gsap.set('.solution-item', { opacity: 1, x: 0 });
-      
+
       gsap.from('.hero-content', {
         opacity: 0,
         y: 40,
@@ -101,20 +103,20 @@ const CaseStudyGermany = () => {
   return (
     <div className="relative min-h-screen bg-[#0a0a0f] text-white overflow-x-hidden">
       <Navigation />
-      
+
       <main ref={sectionRef} className="pt-20">
         {/* Hero Section */}
         <section className="relative py-20 overflow-hidden">
           <div className="absolute inset-0 dot-grid opacity-20" />
           <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0f] via-transparent to-[#0a0a0f]" />
-          
+
           <div className="relative z-10 max-w-5xl mx-auto px-6 hero-content">
             <div className="flex flex-wrap items-center gap-2 mb-6">
               <span className="font-mono text-xs text-[#00f0ff] tracking-wider">[CASE STUDY]</span>
               <span className="text-gray-600">|</span>
               <span className="font-mono text-xs text-gray-400">GERMANY</span>
             </div>
-            
+
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
               One of Germany's Largest Bookmakers
               <br />
@@ -122,9 +124,9 @@ const CaseStudyGermany = () => {
                 Cuts TAT to Under 4 Weeks
               </span>
             </h1>
-            
+
             <p className="text-gray-400 text-lg max-w-3xl mb-8">
-              How a major German bookmaker achieved rapid deployment and operational excellence 
+              How a major German bookmaker achieved rapid deployment and operational excellence
               through FalconDive's AI-powered BI platform.
             </p>
 
@@ -159,9 +161,9 @@ const CaseStudyGermany = () => {
                 The <span className="text-[#ff4444]">Challenge</span>
               </h2>
               <p className="text-gray-400 mb-6">
-                Operating in Germany's highly regulated iGaming market, the client needed a robust 
-                BI solution that could meet strict compliance requirements while delivering rapid 
-                insights. Their legacy systems were slow, fragmented, and unable to keep pace with 
+                Operating in Germany's highly regulated iGaming market, the client needed a robust
+                BI solution that could meet strict compliance requirements while delivering rapid
+                insights. Their legacy systems were slow, fragmented, and unable to keep pace with
                 market demands.
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -183,10 +185,10 @@ const CaseStudyGermany = () => {
               The <span className="text-[#00f0ff]">Solution</span>
             </h2>
             <p className="text-gray-400 mb-8">
-              FalconDive delivered a comprehensive solution that addressed all compliance requirements 
+              FalconDive delivered a comprehensive solution that addressed all compliance requirements
               while dramatically reducing time-to-insight.
             </p>
-            
+
             <div className="space-y-4">
               {solutions.map((solution, i) => (
                 <div key={i} className="solution-item bg-[#1a1a24] border border-gray-800 p-5 rounded-xl hover:border-[#00f0ff]/30 transition-all" style={{ opacity: 1 }}>
@@ -211,7 +213,7 @@ const CaseStudyGermany = () => {
             <h2 className="font-display text-2xl font-bold mb-8">
               The <span className="text-green-400">Results</span>
             </h2>
-            
+
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {results.map((result, i) => (
                 <div key={i} className="bg-gradient-to-br from-[#1a1a24] to-[#0f0f14] border border-gray-800 p-6 rounded-xl">
@@ -229,7 +231,7 @@ const CaseStudyGermany = () => {
           <div className="max-w-3xl mx-auto px-6">
             <div className="bg-[#1a1a24] border border-gray-800 p-8 rounded-2xl">
               <p className="text-xl italic text-gray-300 mb-6">
-                "The speed of deployment was remarkable. What typically takes months was accomplished 
+                "The speed of deployment was remarkable. What typically takes months was accomplished
                 in weeks, without compromising on quality or compliance."
               </p>
               <div className="flex items-center gap-3">
@@ -254,15 +256,19 @@ const CaseStudyGermany = () => {
             <p className="text-gray-400 mb-8">
               See how FalconDive can accelerate your time-to-insight while meeting all compliance requirements.
             </p>
-            <button className="group relative px-8 py-4 bg-[#00f0ff] text-black font-mono font-bold tracking-wider rounded-lg hover:scale-105 transition-transform flex items-center gap-2 mx-auto">
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="group relative px-8 py-4 bg-[#00f0ff] text-black font-mono font-bold tracking-wider rounded-lg hover:scale-105 transition-transform flex items-center gap-2 mx-auto"
+            >
               <span>Request Demo</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
         </section>
       </main>
-      
+
       <Footer />
+      <CalendlyModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
   );
 };
