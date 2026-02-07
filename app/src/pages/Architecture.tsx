@@ -1,19 +1,21 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { 
-  Database, Layers, Cpu, Eye, MessageSquare, Shield, TrendingUp, ArrowRight, 
+import {
+  Database, Layers, Cpu, Eye, MessageSquare, Shield, TrendingUp, ArrowRight,
   Server, Cloud, Lock, Zap, BarChart3, Users, Clock, CheckCircle, AlertTriangle,
   Code, Brain, Workflow, PieChart, Target
 } from 'lucide-react';
 import Navigation from '../sections/Navigation';
 import Footer from '../sections/Footer';
+import CalendlyModal from '../components/CalendlyModal';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Architecture = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const triggersRef = useRef<ScrollTrigger[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     triggersRef.current.forEach(st => st.kill());
@@ -21,7 +23,7 @@ const Architecture = () => {
 
     const ctx = gsap.context(() => {
       // Hero animation
-      gsap.fromTo('.hero-content', 
+      gsap.fromTo('.hero-content',
         { opacity: 0, y: 40 },
         { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }
       );
@@ -30,7 +32,7 @@ const Architecture = () => {
       const createAnimation = (selector: string, trigger: string, stagger = 0.1) => {
         const elements = gsap.utils.toArray<HTMLElement>(selector);
         elements.forEach((el) => gsap.set(el, { opacity: 1, y: 0 }));
-        
+
         const triggerInstance = ScrollTrigger.create({
           trigger,
           start: 'top 90%',
@@ -174,13 +176,13 @@ const Architecture = () => {
   return (
     <div className="relative min-h-screen bg-[#0a0a0f] text-white overflow-x-hidden">
       <Navigation />
-      
+
       <main ref={sectionRef} className="pt-20">
         {/* Hero Section */}
         <section className="relative py-20 overflow-hidden">
           <div className="absolute inset-0 dot-grid opacity-20" />
           <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0f] via-transparent to-[#0a0a0f]" />
-          
+
           <div className="relative z-10 max-w-4xl mx-auto px-6 text-center hero-content">
             <span className="font-mono text-sm text-[#00f0ff] tracking-widest mb-4 block">
               [ARCHITECTURE] SYSTEM_DESIGN
@@ -189,8 +191,8 @@ const Architecture = () => {
               FalconDive <span className="text-[#00f0ff]">Architecture</span>
             </h1>
             <p className="text-gray-400 text-lg max-w-3xl mx-auto">
-              FalconDive is an AI-native BI platform built for scalable, real-time decision-making. 
-              At its core, FalconAI powers every layer through intelligent agents that validate, 
+              FalconDive is an AI-native BI platform built for scalable, real-time decision-making.
+              At its core, FalconAI powers every layer through intelligent agents that validate,
               transform, analyze, and explain data—ensuring seamless flow from ingestion to insight.
             </p>
           </div>
@@ -202,7 +204,7 @@ const Architecture = () => {
             <h2 className="font-display text-3xl font-bold text-center mb-12">
               Platform <span className="text-[#00f0ff]">Architecture</span>
             </h2>
-            
+
             <div className="bg-[#1a1a24] border border-gray-800 rounded-2xl p-8 overflow-x-auto">
               <div className="min-w-[800px]">
                 {/* Architecture Flow Diagram */}
@@ -314,7 +316,7 @@ const Architecture = () => {
             <h2 className="font-display text-3xl font-bold text-center mb-12">
               Platform <span className="text-[#00f0ff]">Layers</span>
             </h2>
-            
+
             <div className="space-y-6">
               {layers.map((layer, i) => {
                 const colors = colorMap[layer.color];
@@ -350,10 +352,10 @@ const Architecture = () => {
               Agentic AI <span className="text-[#00f0ff]">Features</span>
             </h2>
             <p className="text-gray-400 text-center mb-12 max-w-3xl mx-auto">
-              In addition to traditional BI capabilities, FalconDive integrates agentic AI features 
+              In addition to traditional BI capabilities, FalconDive integrates agentic AI features
               that elevate how users interact with data:
             </p>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {agenticFeatures.map((feature, i) => (
                 <div key={i} className="feature-card bg-[#1a1a24] border border-gray-800 p-6 rounded-xl hover:border-[#00f0ff]/30 transition-all" style={{ opacity: 1 }}>
@@ -367,17 +369,17 @@ const Architecture = () => {
             {/* Additional Agentic AI Info */}
             <div className="mt-8 bg-[#1a1a24] border border-gray-800 p-6 rounded-xl">
               <p className="text-gray-400 text-sm mb-4">
-                This integration of conversational AI and agentic collaboration ensures that business users 
+                This integration of conversational AI and agentic collaboration ensures that business users
                 receive not just data, but answers, context, and proactive guidance—when and where they need it most.
               </p>
               <p className="text-gray-400 text-sm mb-4">
-                FalconAI agents also proactively generate alerts and notifications based on business-defined thresholds, 
-                AI-detected risks, or unexpected shifts in key performance metrics. These alerts are surfaced contextually 
+                FalconAI agents also proactively generate alerts and notifications based on business-defined thresholds,
+                AI-detected risks, or unexpected shifts in key performance metrics. These alerts are surfaced contextually
                 within dashboards or delivered to relevant stakeholders via integrated channels such as email, Slack, or in-app messages.
               </p>
               <p className="text-gray-400 text-sm">
-                Each day, FalconOmnis monitors anomalies detected across all datasets, maintaining a live view of what changed, 
-                why it changed, and how it was addressed. Business users can view a summary of unresolved anomalies from the 
+                Each day, FalconOmnis monitors anomalies detected across all datasets, maintaining a live view of what changed,
+                why it changed, and how it was addressed. Business users can view a summary of unresolved anomalies from the
                 previous day, alongside agent-generated explanations and recommended next steps.
               </p>
             </div>
@@ -390,7 +392,7 @@ const Architecture = () => {
             <h2 className="font-display text-3xl font-bold text-center mb-4">
               Business Intelligence <span className="text-[#00f0ff]">Query Processing Workflow</span>
             </h2>
-            
+
             {/* Workflow Visual */}
             <div className="mt-12 bg-[#1a1a24] border border-gray-800 rounded-2xl p-8">
               <div className="flex flex-wrap justify-center items-stretch gap-4">
@@ -421,8 +423,8 @@ const Architecture = () => {
               <span className="text-[#00f0ff]">Overview</span>
             </h2>
             <p className="text-gray-400 text-center">
-              The Business Intelligence Query Processing Workflow represents a modern, AI-powered approach to data analytics 
-              that bridges the gap between business users and complex databases. This system transforms natural language 
+              The Business Intelligence Query Processing Workflow represents a modern, AI-powered approach to data analytics
+              that bridges the gap between business users and complex databases. This system transforms natural language
               questions into actionable insights without requiring technical SQL knowledge from end users.
             </p>
           </div>
@@ -438,8 +440,8 @@ const Architecture = () => {
               <div className="flex items-start gap-4">
                 <AlertTriangle className="w-8 h-8 text-red-400 flex-shrink-0 mt-1" />
                 <p className="text-gray-400">
-                  Traditional business intelligence systems require users to either understand SQL or rely heavily on 
-                  technical teams to extract insights from data. This creates bottlenecks, delays decision-making, 
+                  Traditional business intelligence systems require users to either understand SQL or rely heavily on
+                  technical teams to extract insights from data. This creates bottlenecks, delays decision-making,
                   and limits data accessibility across the organization.
                 </p>
               </div>
@@ -456,7 +458,7 @@ const Architecture = () => {
             <p className="text-gray-400 text-center mb-12 font-mono text-sm">
               Workflow Components
             </p>
-            
+
             <div className="space-y-4">
               {solutionComponents.map((comp, i) => (
                 <div key={i} className="solution-card bg-[#1a1a24] border border-gray-800 p-5 rounded-xl hover:border-[#00f0ff]/30 transition-all" style={{ opacity: 1 }}>
@@ -481,7 +483,7 @@ const Architecture = () => {
             <h2 className="font-display text-3xl font-bold text-center mb-12">
               Implementation <span className="text-[#00f0ff]">Considerations</span>
             </h2>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {implConsiderations.map((impl, i) => (
                 <div key={i} className="impl-card bg-[#1a1a24] border border-gray-800 p-5 rounded-xl" style={{ opacity: 1 }}>
@@ -507,7 +509,7 @@ const Architecture = () => {
             <h2 className="font-display text-3xl font-bold text-center mb-12">
               Use <span className="text-[#00f0ff]">Cases</span>
             </h2>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {useCases.map((useCase, i) => {
                 const colors = colorMap[useCase.color];
@@ -534,7 +536,7 @@ const Architecture = () => {
             <p className="text-gray-400 text-center mb-12">
               Organizations implementing this workflow typically see:
             </p>
-            
+
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {roiMetrics.map((roi, i) => (
                 <div key={i} className="roi-item bg-[#1a1a24] border border-gray-800 p-6 rounded-xl text-center hover:border-[#00f0ff]/30 transition-all" style={{ opacity: 1 }}>
@@ -555,16 +557,16 @@ const Architecture = () => {
             </h2>
             <div className="bg-gradient-to-r from-[#00f0ff]/10 via-[#00f0ff]/5 to-[#00f0ff]/10 border border-[#00f0ff]/20 p-8 rounded-2xl">
               <p className="text-gray-300 mb-4">
-                The Business Intelligence Query Processing Workflow represents a paradigm shift in how organizations 
-                interact with their data. By combining the power of Large Language Models with robust data infrastructure, 
+                The Business Intelligence Query Processing Workflow represents a paradigm shift in how organizations
+                interact with their data. By combining the power of Large Language Models with robust data infrastructure,
                 it creates a seamless bridge between business questions and data-driven answers.
               </p>
               <p className="text-gray-300 mb-4">
-                This isn't just about making data accessible—it's about transforming every employee into a data analyst 
+                This isn't just about making data accessible—it's about transforming every employee into a data analyst
                 and accelerating the pace of informed decision-making across the enterprise.
               </p>
               <p className="text-xl font-display italic text-[#00f0ff] text-center">
-                "The future of business intelligence isn't about learning to speak the language of databases; 
+                "The future of business intelligence isn't about learning to speak the language of databases;
                 it's about teaching databases to understand the language of business."
               </p>
             </div>
@@ -580,7 +582,7 @@ const Architecture = () => {
             <p className="text-gray-400 text-center mb-12">
               This architecture provides several critical advantages:
             </p>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {[
                 { icon: TrendingUp, title: 'Scalability', desc: 'S3 Data Lake and AWS Glue allow organizations to handle growing data volumes with ease.' },
@@ -609,15 +611,19 @@ const Architecture = () => {
             <p className="text-gray-400 mb-8">
               See how our AI-native platform transforms your data infrastructure and accelerates decision-making.
             </p>
-            <button className="group relative px-8 py-4 bg-[#00f0ff] text-black font-mono font-bold tracking-wider rounded-lg hover:scale-105 transition-transform flex items-center gap-2 mx-auto">
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="group relative px-8 py-4 bg-[#00f0ff] text-black font-mono font-bold tracking-wider rounded-lg hover:scale-105 transition-transform flex items-center gap-2 mx-auto"
+            >
               <span>Request Demo</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
         </section>
       </main>
-      
+
       <Footer />
+      <CalendlyModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
   );
 };

@@ -264,7 +264,10 @@ const Pricing = () => {
                       </ul>
                     </div>
 
-                    <button className={`w-full py-3 border ${colors.border} ${colors.text} font-mono text-sm hover:${colors.bg} transition-colors rounded-lg`}>
+                    <button
+                      onClick={() => setIsCalendlyOpen(true)}
+                      className={`w-full py-3 border ${colors.border} ${colors.text} font-mono text-sm hover:${colors.bg} transition-colors rounded-lg`}
+                    >
                       {plan.cta}
                     </button>
 
