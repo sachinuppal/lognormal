@@ -74,7 +74,7 @@ const CTA = () => {
         </h2>
 
         <p className="text-gray-400 text-lg mb-8 max-w-2xl mx-auto">
-          Join CXOs and Revenue Leaders who have recovered millions in leaked value 
+          Join CXOs and Revenue Leaders who have recovered millions in leaked value
           through AI-driven detection, diagnostics, and action.
         </p>
 
@@ -111,7 +111,7 @@ const CTA = () => {
 
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <button 
+          <button
             onClick={() => setIsModalOpen(true)}
             className="group relative px-8 py-4 bg-[#00f0ff] text-black font-mono font-bold tracking-wider rounded-lg overflow-hidden hover:scale-105 transition-transform flex items-center justify-center gap-2"
           >
@@ -121,7 +121,7 @@ const CTA = () => {
             </span>
             <div className="absolute inset-0 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
           </button>
-          <button 
+          <button
             onClick={() => setIsModalOpen(true)}
             className="px-8 py-4 border border-gray-700 hover:border-[#00f0ff] font-mono text-xs transition-colors rounded-lg text-gray-400 hover:text-white flex items-center justify-center gap-2"
           >
@@ -168,7 +168,11 @@ const CTA = () => {
       </div>
 
       {/* Calendly Modal */}
-      <CalendlyModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <CalendlyModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        prefillEmail={email}
+      />
     </section>
   );
 };
