@@ -1,12 +1,14 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Play, ChevronDown, TrendingUp, Shield, Zap, Target } from 'lucide-react';
+import CalendlyModal from '../components/CalendlyModal';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Hero = () => {
   const sectionRef = useRef<HTMLElement>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -148,12 +150,18 @@ const Hero = () => {
 
         {/* CTA Buttons */}
         <div className="hero-cta mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <button className="group relative px-8 py-4 bg-[#00f0ff] text-black font-mono font-bold tracking-wider overflow-hidden rounded-lg hover:scale-105 transition-transform flex items-center gap-2">
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="group relative px-8 py-4 bg-[#00f0ff] text-black font-mono font-bold tracking-wider overflow-hidden rounded-lg hover:scale-105 transition-transform flex items-center gap-2"
+          >
             <Play size={16} />
             <span className="relative z-10">SEE HOW WE RECOVER REVENUE</span>
             <div className="absolute inset-0 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
           </button>
-          <button className="px-8 py-4 border border-gray-700 hover:border-[#00f0ff] font-mono text-xs transition-colors rounded-lg text-gray-400 hover:text-white">
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="px-8 py-4 border border-gray-700 hover:border-[#00f0ff] font-mono text-xs transition-colors rounded-lg text-gray-400 hover:text-white"
+          >
             START YOUR VALUE ASSESSMENT
           </button>
         </div>
@@ -185,6 +193,9 @@ const Hero = () => {
 
       {/* Bottom Gradient */}
       <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#0a0a0f] to-transparent z-[2]" />
+
+      {/* Calendly Modal */}
+      <CalendlyModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </section>
   );
 };
