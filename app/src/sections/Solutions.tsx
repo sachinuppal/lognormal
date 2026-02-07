@@ -6,11 +6,18 @@ import {
   Shield,
   Package,
   Building2,
-  Users,
   Check,
   Layers,
+  Activity,
+  Gamepad2,
+  Crown,
+  ShieldAlert,
   CreditCard,
-  Percent,
+  Filter,
+  LifeBuoy,
+  Fingerprint,
+  Brain,
+  Megaphone,
   BarChart3,
 } from 'lucide-react';
 
@@ -122,28 +129,84 @@ const Solutions = () => {
   // Industry verticals
   const verticals = [
     {
-      name: 'Affiliates',
-      icon: Users,
-      description: 'Affiliate margin leakage detection and recovery. Track partner performance and optimize commission structures.',
-      metrics: ['Commission accuracy', 'Partner ROI', 'Fraud detection'],
+      name: 'Sportsbook Margin',
+      icon: Activity,
+      traditional: 'Strategic margin planning, odds benchmarking, market design.',
+      accelerated: 'Real-time alerting for negative margins, sharp bettor detection, pricing errors.',
+      value_creation: 'Proactive margin defense, market-level profitability improvement.',
+      leakage: '1–3% margin erosion per market per day due to undetected leaks.',
     },
     {
-      name: 'Payments',
+      name: 'Casino Performance',
+      icon: Gamepad2,
+      traditional: 'Monthly bonus planning, game profitability analysis.',
+      accelerated: 'Real-time detection of bonus abuse, game overuse, RTP anomaly.',
+      value_creation: 'Higher ROI on bonuses, reduced abuse, optimized bonus cost.',
+      leakage: 'Bonus spend wastage 15–25% on low-quality or abusive redemptions.',
+    },
+    {
+      name: 'VIP Management',
+      icon: Crown,
+      traditional: 'Personalized strategies, manual VIP cohorting.',
+      accelerated: 'Instant alerts on VIP inactivity, risk behavior, wallet balance drop.',
+      value_creation: 'Revenue retention, faster intervention, better VIP experience.',
+      leakage: '20–40% potential VIP revenue loss due to late or no reaction.',
+    },
+    {
+      name: 'Player Risk',
+      icon: ShieldAlert,
+      traditional: 'Manual profiling, fraud trend reviews.',
+      accelerated: 'AI-based suspicious behavior detection, early abuse flagging.',
+      value_creation: 'Fraud mitigation with precision, reduced false positives.',
+      leakage: 'Losses per abusive player could exceed €1,000/month.',
+    },
+    {
+      name: 'Payments Efficiency',
       icon: CreditCard,
-      description: 'Payment processing optimization and anomaly detection. Reduce failed transactions and optimize routing.',
-      metrics: ['Transaction success rate', 'Processing costs', 'Chargeback prevention'],
+      traditional: 'Monthly tracking of payment performance.',
+      accelerated: 'Real-time alerts on payment failures, slow withdrawals, deposit decline spikes.',
+      value_creation: 'Enhanced user experience, better retention and trust.',
+      leakage: 'Conversion drop & churn due to delayed or failed payments.',
     },
     {
-      name: 'Betting Margins',
-      icon: Percent,
-      description: 'Odds/margin integrity and risk exposure management. Protect profitability while maintaining competitiveness.',
-      metrics: ['Margin integrity', 'Risk exposure', 'Arbitrage detection'],
+      name: 'Conversion Funnel',
+      icon: Filter,
+      traditional: 'Funnel review from acquisition to FTD weekly/monthly.',
+      accelerated: 'Real-time drop-off detection, friction points, KYC abandonment alerts.',
+      value_creation: 'Better acquisition ROI, higher FTD conversion rates.',
+      leakage: '10–15% drop in FTDs due to unresolved frictions or slowness.',
     },
     {
-      name: 'Customer LTV',
-      icon: BarChart3,
-      description: 'Customer lifetime value optimization. Identify high-value segments and reduce churn.',
-      metrics: ['LTV prediction', 'Churn prevention', 'Segment performance'],
+      name: 'High Risk Bettors',
+      icon: LifeBuoy,
+      traditional: 'Manual detection via reports, RG flagging after damage.',
+      accelerated: 'Early warning based on behavioral changes, spending patterns.',
+      value_creation: 'Timely RG interventions, reduced compliance risks.',
+      leakage: 'Reputational & regulatory risk, delayed RG flagging.',
+    },
+    {
+      name: 'Fraud & Collusion',
+      icon: Fingerprint,
+      traditional: 'Forensics-based reviews by Risk/Compliance teams.',
+      accelerated: 'AI-powered detection of bot behavior, game collusion, coordinated attacks.',
+      value_creation: 'Reduced financial exposure, faster mitigation.',
+      leakage: 'High-value loss events (e.g., roulette collusion) can cost €10K+.',
+    },
+    {
+      name: 'Customer Intel',
+      icon: Brain,
+      traditional: 'Segmentation design, LTV modeling, lifecycle stage definitions.',
+      accelerated: 'Auto-updated segments, churn prediction alerts, CLV tracking.',
+      value_creation: 'Lifecycle automation, better bonus allocation, CRM ROI growth.',
+      leakage: 'Missed reactivation/reengagement windows, over/underbonus spend.',
+    },
+    {
+      name: 'Campaign ROI',
+      icon: Megaphone,
+      traditional: 'Post-campaign analysis, uplift measurement.',
+      accelerated: 'Instant detection of underperforming/abused campaigns.',
+      value_creation: 'Live optimizations, cost control, better spend-to-value alignment.',
+      leakage: '20–30% of CRM budget leakage due to poor response or abuse.',
     },
   ];
 
@@ -174,7 +237,7 @@ const Solutions = () => {
             Built for <span className="text-[#00f0ff]">Outcome-Accountable</span> Leaders
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto">
-            FalconDive serves CXOs, Product Heads, Risk Leaders, and Business Owners 
+            FalconDive serves CXOs, Product Heads, Risk Leaders, and Business Owners
             who are accountable for margins, revenue, and growth.
           </p>
         </div>
@@ -291,11 +354,10 @@ const Solutions = () => {
               <button
                 key={i}
                 onClick={() => setActiveVertical(i)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-lg font-mono text-xs transition-all ${
-                  activeVertical === i
-                    ? 'bg-[#00f0ff]/10 border border-[#00f0ff]/30 text-[#00f0ff]'
-                    : 'bg-[#1a1a24] border border-gray-800 text-gray-400 hover:border-gray-700'
-                }`}
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg font-mono text-xs transition-all ${activeVertical === i
+                  ? 'bg-[#00f0ff]/10 border border-[#00f0ff]/30 text-[#00f0ff]'
+                  : 'bg-[#1a1a24] border border-gray-800 text-gray-400 hover:border-gray-700'
+                  }`}
               >
                 <vertical.icon className="w-4 h-4" />
                 {vertical.name}
@@ -304,32 +366,67 @@ const Solutions = () => {
           </div>
 
           {/* Active Vertical Content */}
-          <div className="bg-[#1a1a24] border border-gray-800 rounded-xl p-6 md:p-8">
-            <div className="flex flex-col md:flex-row gap-6">
-              <div className="flex-shrink-0">
-                <div className="w-16 h-16 bg-[#00f0ff]/10 rounded-xl flex items-center justify-center">
-                  {(() => {
-                    const Icon = verticals[activeVertical].icon;
-                    return <Icon className="w-8 h-8 text-[#00f0ff]" />;
-                  })()}
+          {/* Active Vertical Content */}
+          <div className="bg-[#1a1a24] border border-gray-800 rounded-xl overflow-hidden">
+            <div className="grid grid-cols-1 md:grid-cols-2">
+              {/* Left Column: Traditional / Status Quo */}
+              <div className="p-6 md:p-8 border-b md:border-b-0 md:border-r border-gray-800 bg-[#15151a]">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center">
+                    <Layers className="w-5 h-5 text-gray-500" />
+                  </div>
+                  <div>
+                    <h4 className="font-display font-bold text-gray-300">Traditional Approach</h4>
+                    <p className="font-mono text-[10px] text-gray-500">MANUAL • REACTIVE • SLOW</p>
+                  </div>
+                </div>
+
+                <div className="mb-6">
+                  <h5 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Process</h5>
+                  <p className="text-gray-400 text-sm leading-relaxed">
+                    {verticals[activeVertical].traditional}
+                  </p>
+                </div>
+
+                <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4">
+                  <h5 className="flex items-center gap-2 text-xs font-bold text-red-500 uppercase tracking-wider mb-2">
+                    <ShieldAlert size={14} /> Value Leakage
+                  </h5>
+                  <p className="text-red-400/90 text-sm font-medium">
+                    {verticals[activeVertical].leakage}
+                  </p>
                 </div>
               </div>
-              <div className="flex-1">
-                <h4 className="font-display text-xl font-bold mb-2">
-                  {verticals[activeVertical].name}
-                </h4>
-                <p className="text-gray-400 mb-4">
-                  {verticals[activeVertical].description}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {verticals[activeVertical].metrics.map((metric, i) => (
-                    <span
-                      key={i}
-                      className="text-[10px] font-mono bg-[#00f0ff]/10 text-[#00f0ff] px-3 py-1.5 rounded-full"
-                    >
-                      {metric}
-                    </span>
-                  ))}
+
+              {/* Right Column: FalconDive / Accelerated */}
+              <div className="p-6 md:p-8 bg-gradient-to-br from-[#1a1a24] to-[#00f0ff]/5">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-10 h-10 bg-[#00f0ff]/10 rounded-lg flex items-center justify-center">
+                    {(() => {
+                      const Icon = verticals[activeVertical].icon;
+                      return <Icon className="w-5 h-5 text-[#00f0ff]" />;
+                    })()}
+                  </div>
+                  <div>
+                    <h4 className="font-display font-bold text-white">FalconDive AI</h4>
+                    <p className="font-mono text-[10px] text-[#00f0ff]">REAL-TIME • PROACTIVE • AUTOMATED</p>
+                  </div>
+                </div>
+
+                <div className="mb-6">
+                  <h5 className="text-xs font-bold text-[#00f0ff] uppercase tracking-wider mb-2">Accelerated Analytics</h5>
+                  <p className="text-gray-300 text-sm leading-relaxed">
+                    {verticals[activeVertical].accelerated}
+                  </p>
+                </div>
+
+                <div className="bg-[#00f0ff]/10 border border-[#00f0ff]/30 rounded-lg p-4">
+                  <h5 className="flex items-center gap-2 text-xs font-bold text-[#00f0ff] uppercase tracking-wider mb-2">
+                    <TrendingUp size={14} /> Value Creation
+                  </h5>
+                  <p className="text-[#00f0ff] text-sm font-medium">
+                    {verticals[activeVertical].value_creation}
+                  </p>
                 </div>
               </div>
             </div>

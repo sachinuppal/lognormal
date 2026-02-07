@@ -12,44 +12,44 @@ const Hero = () => {
     const ctx = gsap.context(() => {
       // Title animation
       const tl = gsap.timeline();
-      
+
       tl.from('.hero-badge', {
         opacity: 0,
         y: 20,
         duration: 0.6,
         ease: 'power3.out',
       })
-      .from('.hero-title-line', {
-        opacity: 0,
-        y: 50,
-        duration: 1,
-        stagger: 0.2,
-        ease: 'power3.out',
-      }, '-=0.3')
-      .from('.hero-subtitle', {
-        opacity: 0,
-        y: 30,
-        duration: 0.8,
-        ease: 'power3.out',
-      }, '-=0.5')
-      .from('.hero-terminal', {
-        opacity: 0,
-        y: 30,
-        duration: 0.8,
-        ease: 'power3.out',
-      }, '-=0.5')
-      .from('.hero-cta', {
-        opacity: 0,
-        y: 20,
-        duration: 0.6,
-        ease: 'power3.out',
-      }, '-=0.4')
-      .from('.hero-stats', {
-        opacity: 0,
-        y: 20,
-        duration: 0.6,
-        ease: 'power3.out',
-      }, '-=0.3');
+        .from('.hero-title-line', {
+          opacity: 0,
+          y: 50,
+          duration: 1,
+          stagger: 0.2,
+          ease: 'power3.out',
+        }, '-=0.3')
+        .from('.hero-subtitle', {
+          opacity: 0,
+          y: 30,
+          duration: 0.8,
+          ease: 'power3.out',
+        }, '-=0.5')
+        .from('.hero-terminal', {
+          opacity: 0,
+          y: 30,
+          duration: 0.8,
+          ease: 'power3.out',
+        }, '-=0.5')
+        .from('.hero-cta', {
+          opacity: 0,
+          y: 20,
+          duration: 0.6,
+          ease: 'power3.out',
+        }, '-=0.4')
+        .from('.hero-stats', {
+          opacity: 0,
+          y: 20,
+          duration: 0.6,
+          ease: 'power3.out',
+        }, '-=0.3');
 
       // Parallax scroll effect for background
       gsap.to('.hero-bg', {
@@ -113,7 +113,7 @@ const Hero = () => {
 
         {/* Subtitle - Value Proposition */}
         <p className="hero-subtitle text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-6">
-          AI-powered platform that detects revenue leakages, diagnoses root causes, 
+          AI-powered platform that detects revenue leakages, diagnoses root causes,
           drives corrective actions, and continuously monitors outcomes.
         </p>
 
@@ -159,12 +159,13 @@ const Hero = () => {
         </div>
 
         {/* Stats Row - Value Focused KPIs */}
-        <div className="hero-stats mt-14 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-2xl mx-auto">
+        <div className="hero-stats mt-14 grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-6 max-w-4xl mx-auto">
           {[
             { value: '€45M+', unit: '', label: 'Revenue Recovered' },
             { value: '18', unit: '%', label: 'Avg. Margin Uplift' },
             { value: '2,400+', unit: '', label: 'Leakages Detected' },
             { value: '94', unit: '%', label: 'Actions Closed' },
+            { value: '95', unit: '%', label: 'Time to Act Reduced' },
           ].map((stat, i) => (
             <div key={i} className="text-center">
               <div className="font-display text-xl md:text-2xl font-bold text-white">
