@@ -43,22 +43,7 @@ const ScriptsManager: React.FC = () => {
         }
     }, [consent.marketing, consent.analytics]);
 
-    // Watchman AI SDK (Marketing/Analytics)
-    useEffect(() => {
-        if (consent.marketing || consent.analytics) {
-            // Check if script already exists to avoid duplication
-            if (document.querySelector('script[src="https://sdk.gowatchman.com/snippet.js"]')) return;
 
-            const script = document.createElement('script');
-            script.src = "https://sdk.gowatchman.com/snippet.js";
-            script.async = true;
-            document.head.appendChild(script);
-
-            return () => {
-                // Optional cleanup
-            };
-        }
-    }, [consent.marketing, consent.analytics]);
 
     return null; // This component handles side effects only
 };
