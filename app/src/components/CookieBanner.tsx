@@ -20,22 +20,22 @@ const CookieBanner = () => {
     if (!isVisible) return null;
 
     return (
-        <div className="fixed bottom-0 left-0 right-0 z-50 bg-[#1a1a24] border-t border-gray-800 p-4 md:p-6 shadow-2xl animate-in slide-in-from-bottom duration-500">
-            <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-                <div className="flex-1 pr-8">
-                    <p className="text-sm text-gray-400 leading-relaxed">
-                        When you visit or log in to our website, cookies and similar technologies may be used by our online data partners or vendors to associate these activities with other personal information they or others have about you, including by association with your email. We (or service providers on our behalf) may then send communications and marketing to these email. You may opt out of receiving this advertising by visiting <a href="https://app.retention.com/optout" target="_blank" rel="noopener noreferrer" className="text-[#00f0ff] hover:underline">https://app.retention.com/optout</a>.
+        <div className="fixed bottom-0 left-0 right-0 z-50 bg-[#1a1a24] border-t border-gray-800 p-2 md:p-3 shadow-2xl animate-in slide-in-from-bottom duration-500">
+            <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
+                <div className="flex-1 pr-4">
+                    <p className="text-[10px] text-gray-400 leading-tight">
+                        When you visit or log in to our website, cookies and similar technologies may be used by our online data partners or vendors to associate these activities with other personal information they or others have about you, including by association with your email. We (or service providers on our behalf) may then send communications and marketing to these email. You may opt out of receiving this advertising by visiting <a href="https://app.retention.com/optout" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-gray-300 underline">https://app.retention.com/optout</a>.
                     </p>
-                    <p className="text-xs text-gray-500 mt-2">
+                    <p className="text-[10px] text-gray-500 mt-1">
                         By using our site, you agree to our <Link to="/privacy-policy" className="text-[#00f0ff] hover:underline">Privacy Policy</Link>.
                     </p>
                 </div>
                 <button
                     onClick={handleDismiss}
-                    className="flex items-center gap-2 px-4 py-2 bg-[#00f0ff] text-black font-semibold rounded hover:bg-[#00d0df] transition-colors whitespace-nowrap"
+                    className="flex items-center gap-1.5 px-3 py-1.5 bg-[#00f0ff] text-black text-xs font-semibold rounded hover:bg-[#00d0df] transition-colors whitespace-nowrap"
                 >
                     <span>I Understand</span>
-                    <X className="w-4 h-4" />
+                    <X className="w-3 h-3" />
                 </button>
             </div>
         </div>
