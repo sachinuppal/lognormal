@@ -12,23 +12,23 @@ const PrivacyPolicy = () => {
   return (
     <div className="relative min-h-screen bg-[#0a0a0f] text-white overflow-x-hidden">
       <Navigation />
-      
+
       <main className="pt-24 pb-20">
         {/* Header */}
         <section className="relative py-16 overflow-hidden">
           <div className="absolute inset-0 dot-grid opacity-10" />
           <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0f] via-transparent to-[#0a0a0f]" />
-          
+
           <div className="relative z-10 max-w-4xl mx-auto px-6">
             <Link to="/" className="inline-flex items-center gap-2 text-gray-400 hover:text-[#00f0ff] transition-colors mb-8">
               <ArrowLeft className="w-4 h-4" />
               <span className="font-mono text-sm">Back</span>
             </Link>
-            
+
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-center">
               <span className="text-[#00f0ff]">Privacy</span> Policy
             </h1>
-            
+
             <div className="text-center text-gray-400 font-mono text-sm space-y-1">
               <p><span className="text-gray-500">Effective Date:</span> 4 December, 2024</p>
               <p><span className="text-gray-500">Last Updated:</span> 4 December, 2025</p>
@@ -142,7 +142,18 @@ const PrivacyPolicy = () => {
 
               {/* Section 7 */}
               <div className="mb-10">
-                <h2 className="font-display text-2xl font-bold text-[#00f0ff] mb-4">7. Data Retention</h2>
+                <h2 className="font-display text-2xl font-bold text-[#00f0ff] mb-4">7. Data Collection by Partners</h2>
+                <p className="text-gray-400 mb-4">
+                  When you visit or log in to our website, cookies and similar technologies may be used by our online data partners or vendors to associate these activities with other personal information they or others have about you, including by association with your email. We (or service providers on our behalf) may then send communications and marketing to these email. You may opt out of receiving this advertising by visiting <a href="https://app.retention.com/optout" target="_blank" rel="noopener noreferrer" className="text-[#00f0ff] hover:underline">https://app.retention.com/optout</a>.
+                </p>
+                <p className="text-gray-400">
+                  You also have the option to opt out of the collection of your personal data in compliance with GDPR. To exercise this option, please visit <a href="https://www.rb2b.com/rb2b-gdpr-opt-out" target="_blank" rel="noopener noreferrer" className="text-[#00f0ff] hover:underline">https://www.rb2b.com/rb2b-gdpr-opt-out</a>.
+                </p>
+              </div>
+
+              {/* Section 8 */}
+              <div className="mb-10">
+                <h2 className="font-display text-2xl font-bold text-[#00f0ff] mb-4">8. Data Retention</h2>
                 <p className="text-gray-400">We retain your data:</p>
                 <ul className="space-y-2 text-gray-400 list-disc list-inside mt-4">
                   <li>For as long as you use our services or as required by law.</li>
@@ -150,21 +161,21 @@ const PrivacyPolicy = () => {
                 </ul>
               </div>
 
-              {/* Section 8 */}
-              <div className="mb-10">
-                <h2 className="font-display text-2xl font-bold text-[#00f0ff] mb-4">8. International Data Transfers</h2>
-                <p className="text-gray-400">Data processed by FalconDive may be transferred to and stored in regions outside the European Economic Area (EEA). Such transfers are safeguarded by Standard Contractual Clauses (SCCs) or other approved mechanisms.</p>
-              </div>
-
               {/* Section 9 */}
               <div className="mb-10">
-                <h2 className="font-display text-2xl font-bold text-[#00f0ff] mb-4">9. Updates to This Policy</h2>
-                <p className="text-gray-400">We may update this Privacy Policy periodically. Significant changes will be communicated via email or platform notifications. Continued use of FalconDive constitutes acceptance of the updated policy.</p>
+                <h2 className="font-display text-2xl font-bold text-[#00f0ff] mb-4">9. International Data Transfers</h2>
+                <p className="text-gray-400">Data processed by FalconDive may be transferred to and stored in regions outside the European Economic Area (EEA). Such transfers are safeguarded by Standard Contractual Clauses (SCCs) or other approved mechanisms.</p>
               </div>
 
               {/* Section 10 */}
               <div className="mb-10">
-                <h2 className="font-display text-2xl font-bold text-[#00f0ff] mb-4">10. Contact Us</h2>
+                <h2 className="font-display text-2xl font-bold text-[#00f0ff] mb-4">10. Updates to This Policy</h2>
+                <p className="text-gray-400">We may update this Privacy Policy periodically. Significant changes will be communicated via email or platform notifications. Continued use of FalconDive constitutes acceptance of the updated policy.</p>
+              </div>
+
+              {/* Section 11 */}
+              <div className="mb-10">
+                <h2 className="font-display text-2xl font-bold text-[#00f0ff] mb-4">11. Contact Us</h2>
                 <p className="text-gray-400 mb-4">For questions, concerns, or to exercise your privacy rights, contact us at:</p>
                 <div className="bg-[#1a1a24] border border-gray-800 p-6 rounded-xl">
                   <p className="text-gray-400"><span className="text-gray-500">Email:</span> <a href="mailto:info@falcondive.io" className="text-[#00f0ff] hover:underline">info@falcondive.io</a></p>
@@ -175,7 +186,7 @@ const PrivacyPolicy = () => {
           </div>
         </section>
       </main>
-      
+
       <Footer />
     </div>
   );

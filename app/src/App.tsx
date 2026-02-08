@@ -66,7 +66,7 @@ const HomePage = () => {
   return (
     <div className="relative min-h-screen bg-[#0a0a0f] text-white overflow-x-hidden">
       <Navigation />
-      
+
       <main>
         <Hero />
         <ValueFlow />
@@ -80,11 +80,15 @@ const HomePage = () => {
         <CTA />
         <BookDemo />
       </main>
-      
+
       <Footer />
     </div>
   );
 };
+
+import CookieBanner from './components/CookieBanner';
+
+// ... (existing imports)
 
 // Main App Component
 function App() {
@@ -101,6 +105,7 @@ function App() {
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/data-processing-agreement" element={<DataProcessingAgreement />} />
       </Routes>
+      <CookieBanner />
     </Router>
   );
 }
