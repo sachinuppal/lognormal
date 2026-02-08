@@ -86,27 +86,34 @@ const HomePage = () => {
   );
 };
 
-import CookieBanner from './components/CookieBanner';
+// ... (existing imports)
+
+import { ConsentProvider } from './context/ConsentContext';
+import ConsentManager from './components/ConsentManager';
+import ScriptsManager from './components/ScriptsManager';
 
 // ... (existing imports)
 
 // Main App Component
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/pricing" element={<Pricing />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/architecture" element={<Architecture />} />
-        <Route path="/case-studies/igaming-giant-cee" element={<CaseStudyCEE />} />
-        <Route path="/case-studies/top-bookmarker-germany" element={<CaseStudyGermany />} />
-        <Route path="/case-studies/igaming-innovators-south-europe" element={<CaseStudySouthEurope />} />
-        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-        <Route path="/data-processing-agreement" element={<DataProcessingAgreement />} />
-      </Routes>
-      <CookieBanner />
-    </Router>
+    <ConsentProvider>
+      <ScriptsManager />
+      <Router>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/pricing" element={<Pricing />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/architecture" element={<Architecture />} />
+          <Route path="/case-studies/igaming-giant-cee" element={<CaseStudyCEE />} />
+          <Route path="/case-studies/top-bookmarker-germany" element={<CaseStudyGermany />} />
+          <Route path="/case-studies/igaming-innovators-south-europe" element={<CaseStudySouthEurope />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/data-processing-agreement" element={<DataProcessingAgreement />} />
+        </Routes>
+        <ConsentManager />
+      </Router>
+    </ConsentProvider>
   );
 }
 
