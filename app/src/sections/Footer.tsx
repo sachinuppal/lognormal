@@ -59,9 +59,9 @@ const Footer = () => {
           {/* Brand Column */}
           <div className="lg:col-span-1">
             <Link to="/" className="flex items-center gap-2 mb-4">
-              <img 
-                src="/images/falcondive-logo-white.svg" 
-                alt="FalconDive" 
+              <img
+                src="/images/falcondive-logo-white.svg"
+                alt="FalconDive"
                 className="h-8 w-auto"
               />
             </Link>
@@ -158,7 +158,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t border-gray-900 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="text-gray-700 font-mono text-xs">
-            [EOF] FALCONDIVE_SYSTEMS © 2025 // CONFIDENTIAL
+            [EOF] FALCONDIVE_SYSTEMS © 2026 // LIVE
           </div>
 
           {/* Social Links */}
