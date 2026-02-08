@@ -13,45 +13,48 @@ const Hero = () => {
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Title animation
-      const tl = gsap.timeline();
+      const tl = gsap.timeline({
+        onComplete: () => {
+          // Safety: ensure elements are visible after animation
+          gsap.set(['.hero-badge', '.hero-title-line', '.hero-subtitle', '.hero-terminal', '.hero-cta', '.hero-stats'], {
+            clearProps: 'opacity,transform,visibility'
+          });
+        }
+      });
 
-      tl.from('.hero-badge', {
-        opacity: 0,
-        y: 20,
-        duration: 0.6,
-        ease: 'power3.out',
-      })
-        .from('.hero-title-line', {
-          opacity: 0,
-          y: 50,
-          duration: 1,
-          stagger: 0.2,
-          ease: 'power3.out',
-        }, '-=0.3')
-        .from('.hero-subtitle', {
-          opacity: 0,
-          y: 30,
-          duration: 0.8,
-          ease: 'power3.out',
-        }, '-=0.5')
-        .from('.hero-terminal', {
-          opacity: 0,
-          y: 30,
-          duration: 0.8,
-          ease: 'power3.out',
-        }, '-=0.5')
-        .from('.hero-cta', {
-          opacity: 0,
-          y: 20,
-          duration: 0.6,
-          ease: 'power3.out',
-        }, '-=0.4')
-        .from('.hero-stats', {
-          opacity: 0,
-          y: 20,
-          duration: 0.6,
-          ease: 'power3.out',
-        }, '-=0.3');
+      try {
+        tl.fromTo('.hero-badge',
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }
+        )
+          .fromTo('.hero-title-line',
+            { opacity: 0, y: 50 },
+            { opacity: 1, y: 0, duration: 1, stagger: 0.2, ease: 'power3.out' }, '-=0.3'
+          )
+          .fromTo('.hero-subtitle',
+            { opacity: 0, y: 30 },
+            { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, '-=0.5'
+          )
+          .fromTo('.hero-terminal',
+            { opacity: 0, y: 30 },
+            { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, '-=0.5'
+          )
+          .fromTo('.hero-cta',
+            { opacity: 0, y: 20 },
+            { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }, '-=0.4'
+          )
+          .fromTo('.hero-stats',
+            { opacity: 0, y: 20 },
+            { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }, '-=0.3'
+          );
+      } catch (e) {
+        console.error("GSAP animation failed, forcing visibility", e);
+        gsap.set(['.hero-badge', '.hero-title-line', '.hero-subtitle', '.hero-terminal', '.hero-cta', '.hero-stats'], {
+          opacity: 1,
+          y: 0,
+          clearProps: 'all'
+        });
+      }
 
       // Parallax scroll effect for background
       gsap.to('.hero-bg', {
