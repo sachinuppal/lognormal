@@ -154,7 +154,7 @@ const About = () => {
       role: 'Sr. Vice President',
       exp: 'Ex- Ivy Comptech, Games24x7, Bunga 365, PokerHigh',
       image: '/images/navneeth-srinivas.jpg',
-      linkedin: '#'
+      linkedin: 'https://www.linkedin.com/in/navneethsrinivas/'
     },
   ];
 
