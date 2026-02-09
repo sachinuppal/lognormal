@@ -1,5 +1,5 @@
-import { useEffect, useRef } from 'react';
-import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import { useEffect, useLayoutEffect, useRef } from 'react';
+import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
@@ -31,6 +31,45 @@ import DataProcessingAgreement from './pages/DataProcessingAgreement';
 
 gsap.registerPlugin(ScrollTrigger);
 
+// ScrollToTop component — kills stale ScrollTriggers and resets scroll on route change
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  // useLayoutEffect runs SYNCHRONOUSLY after DOM mutation, before browser paint
+  useLayoutEffect(() => {
+    // Kill every ScrollTrigger so sections re-create them fresh
+    ScrollTrigger.getAll().forEach(st => st.kill());
+
+    // Destroy Lenis first — it intercepts all scroll methods
+    const lenis = (window as Window & { __lenis?: Lenis }).__lenis;
+    if (lenis) {
+      lenis.destroy();
+      (window as Window & { __lenis?: Lenis }).__lenis = undefined;
+    }
+
+    // Force scroll to top synchronously (before paint)
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  }, [pathname]);
+
+  // Separate useEffect for async tasks (delayed scroll fallback & ScrollTrigger refresh)
+  useEffect(() => {
+    // Post-paint scroll reset fallback
+    requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    });
+
+    // Allow the new page's effects to create their ScrollTriggers, then refresh
+    const refreshTimer = setTimeout(() => ScrollTrigger.refresh(), 150);
+    return () => clearTimeout(refreshTimer);
+  }, [pathname]);
+
+  return null;
+};
+
 // Home Page Component
 const HomePage = () => {
   const lenisRef = useRef<Lenis | null>(null);
@@ -42,6 +81,9 @@ const HomePage = () => {
       orientation: 'vertical',
       smoothWheel: true,
     });
+
+    // Expose Lenis globally so ScrollToTop can destroy it before scroll reset
+    (window as Window & { __lenis?: Lenis }).__lenis = lenisRef.current;
 
     function raf(time: number) {
       lenisRef.current?.raf(time);
@@ -57,8 +99,13 @@ const HomePage = () => {
 
     gsap.ticker.lagSmoothing(0);
 
+    // Refresh ScrollTrigger after Lenis initializes so all section triggers register
+    const refreshTimer = setTimeout(() => ScrollTrigger.refresh(), 200);
+
     return () => {
+      clearTimeout(refreshTimer);
       lenisRef.current?.destroy();
+      (window as Window & { __lenis?: Lenis }).__lenis = undefined;
       ScrollTrigger.getAll().forEach(st => st.kill());
     };
   }, []);
@@ -100,6 +147,7 @@ function App() {
     <ConsentProvider>
       <ScriptsManager />
       <Router>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/pricing" element={<Pricing />} />

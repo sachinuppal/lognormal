@@ -1,5 +1,6 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Twitter, Linkedin, Instagram } from 'lucide-react';
+import Lenis from 'lenis';
 
 const Footer = () => {
   const location = useLocation();
@@ -35,6 +36,19 @@ const Footer = () => {
     { label: 'Top Bookmarker Germany', href: '/case-studies/top-bookmarker-germany', scrollToTop: true },
     { label: 'iGaming Innovators South Europe', href: '/case-studies/igaming-innovators-south-europe', scrollToTop: true },
   ];
+
+  const scrollToTopForce = () => {
+    // Destroy Lenis SYNCHRONOUSLY in click handler (before route change)
+    const lenis = (window as Window & { __lenis?: Lenis }).__lenis;
+    if (lenis) {
+      lenis.destroy();
+      (window as Window & { __lenis?: Lenis }).__lenis = undefined;
+    }
+    // Force scroll to top
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  };
 
   const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (!isHomePage) {
@@ -118,11 +132,7 @@ const Footer = () => {
                 <li key={index}>
                   <Link
                     to={link.href}
-                    onClick={() => {
-                      if (link.scrollToTop) {
-                        window.scrollTo(0, 0);
-                      }
-                    }}
+                    onClick={scrollToTopForce}
                     className="hover:text-white transition-colors"
                   >
                     {link.label}
@@ -140,11 +150,7 @@ const Footer = () => {
                 <li key={index}>
                   <Link
                     to={link.href}
-                    onClick={() => {
-                      if (link.scrollToTop) {
-                        window.scrollTo(0, 0);
-                      }
-                    }}
+                    onClick={scrollToTopForce}
                     className="hover:text-white transition-colors"
                   >
                     {link.label}

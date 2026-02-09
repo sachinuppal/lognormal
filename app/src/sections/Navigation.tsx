@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X, Zap, Calendar } from 'lucide-react';
 import CalendlyModal from '../components/CalendlyModal';
 
@@ -8,6 +8,7 @@ const Navigation = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isCalendlyOpen, setIsCalendlyOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
   const isHomePage = location.pathname === '/';
 
   useEffect(() => {
@@ -31,16 +32,23 @@ const Navigation = () => {
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, link: typeof navLinks[0]) => {
     if (link.isAnchor) {
-      if (!isHomePage) {
-        // If on a different page and clicking an anchor link, let the link navigate to home first
-        return;
-      }
-      // On home page - prevent default and scroll to section
       e.preventDefault();
       const targetId = link.href.replace('#', '');
-      const element = document.getElementById(targetId);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+      if (!isHomePage) {
+        // Navigate to home first, then scroll to section after a short delay
+        navigate('/');
+        setTimeout(() => {
+          const element = document.getElementById(targetId);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 300);
+      } else {
+        // On home page - scroll to section directly
+        const element = document.getElementById(targetId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
       }
       setIsMobileMenuOpen(false);
     } else {
@@ -50,18 +58,17 @@ const Navigation = () => {
 
   return (
     <nav
-      className={`fixed top-0 w-full z-50 transition-all duration-500 ${
-        isScrolled
+      className={`fixed top-0 w-full z-50 transition-all duration-500 ${isScrolled
           ? 'bg-black/90 backdrop-blur-md border-b border-gray-800'
           : 'border-b border-transparent'
-      }`}
+        }`}
     >
       <div className="max-w-7xl mx-auto px-4 py-2 flex justify-between items-center">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3 group">
-          <img 
-            src="/images/falcondive-logo-white.svg" 
-            alt="FalconDive" 
+          <img
+            src="/images/falcondive-logo-white.svg"
+            alt="FalconDive"
             className="h-10 md:h-12 w-auto object-contain transition-transform group-hover:scale-105"
           />
           {/* AI-First Badge */}
@@ -98,15 +105,15 @@ const Navigation = () => {
 
         {/* Actions */}
         <div className="hidden xl:flex gap-2 items-center">
-          <Link 
-            to="https://platform.falcondive.io/login" 
+          <Link
+            to="https://platform.falcondive.io/login"
             target="_blank"
             rel="noopener noreferrer"
             className="font-mono text-[10px] text-gray-400 hover:text-white transition-colors"
           >
             LOGIN
           </Link>
-          <button 
+          <button
             onClick={() => setIsCalendlyOpen(true)}
             className="px-2 py-1.5 bg-[#00f0ff]/10 border border-[#00f0ff]/50 text-[#00f0ff] font-mono text-[10px] hover:bg-[#00f0ff]/20 transition-all animate-pulse-glow rounded whitespace-nowrap flex items-center gap-1"
           >
@@ -150,15 +157,15 @@ const Navigation = () => {
               )
             ))}
             <div className="pt-3 border-t border-gray-800 space-y-2">
-              <a 
-                href="https://platform.falcondive.io/login" 
+              <a
+                href="https://platform.falcondive.io/login"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block font-mono text-xs text-gray-400"
               >
                 LOGIN
               </a>
-              <button 
+              <button
                 onClick={() => {
                   setIsMobileMenuOpen(false);
                   setIsCalendlyOpen(true);

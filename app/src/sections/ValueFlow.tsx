@@ -10,42 +10,37 @@ const ValueFlow = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // Set visible defaults first so elements are always visible
+      gsap.set('.valueflow-title', { opacity: 1, y: 0 });
+      gsap.set('.flow-step', { opacity: 1, y: 0 });
+      gsap.set('.flow-connector', { scaleX: 1 });
+
       // Section title animation
-      gsap.from('.valueflow-title', {
-        opacity: 0,
-        y: 30,
-        duration: 0.8,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top 80%',
-        },
-      });
+      gsap.fromTo('.valueflow-title',
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
+          scrollTrigger: { trigger: sectionRef.current, start: 'top 80%' },
+        }
+      );
 
       // Pipeline steps animation
-      gsap.from('.flow-step', {
-        opacity: 0,
-        y: 50,
-        duration: 0.7,
-        stagger: 0.15,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '.flow-pipeline',
-          start: 'top 80%',
-        },
-      });
+      gsap.fromTo('.flow-step',
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1, y: 0, duration: 0.7, stagger: 0.15, ease: 'power3.out',
+          scrollTrigger: { trigger: '.flow-pipeline', start: 'top 80%' },
+        }
+      );
 
       // Connector lines animation
-      gsap.from('.flow-connector', {
-        scaleX: 0,
-        duration: 0.5,
-        stagger: 0.15,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: '.flow-pipeline',
-          start: 'top 70%',
-        },
-      });
+      gsap.fromTo('.flow-connector',
+        { scaleX: 0 },
+        {
+          scaleX: 1, duration: 0.5, stagger: 0.15, ease: 'power2.out',
+          scrollTrigger: { trigger: '.flow-pipeline', start: 'top 70%' },
+        }
+      );
     }, sectionRef);
 
     return () => ctx.revert();
@@ -114,7 +109,7 @@ const ValueFlow = () => {
             <span className="text-[#00f0ff]">Value</span>
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto">
-            FalconDive operates one level above passive intelligence. Our 4-stage 
+            FalconDive operates one level above passive intelligence. Our 4-stage
             pipeline converts signals into measurable business outcomes.
           </p>
         </div>

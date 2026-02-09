@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { 
-  Shield, Brain, Zap, LineChart, Layers, 
+import {
+  Shield, Brain, Zap, LineChart, Layers,
   Bell, MessageSquare, Database, BarChart3, FileText
 } from 'lucide-react';
 
@@ -13,42 +13,37 @@ const Platform = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // Set visible defaults
+      gsap.set('.platform-header', { opacity: 1, y: 0 });
+      gsap.set('.omnis-orchestration', { opacity: 1, y: 0 });
+      gsap.set('.stage-card', { opacity: 1, y: 0 });
+
       // Section header animation
-      gsap.from('.platform-header', {
-        opacity: 0,
-        y: 30,
-        duration: 0.8,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top 80%',
-        },
-      });
+      gsap.fromTo('.platform-header',
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
+          scrollTrigger: { trigger: sectionRef.current, start: 'top 80%' },
+        }
+      );
 
       // Omnis orchestration animation
-      gsap.from('.omnis-orchestration', {
-        opacity: 0,
-        y: 40,
-        duration: 0.8,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '.omnis-orchestration',
-          start: 'top 85%',
-        },
-      });
+      gsap.fromTo('.omnis-orchestration',
+        { opacity: 0, y: 40 },
+        {
+          opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
+          scrollTrigger: { trigger: '.omnis-orchestration', start: 'top 85%' },
+        }
+      );
 
       // Stage cards animation
-      gsap.from('.stage-card', {
-        opacity: 0,
-        y: 50,
-        duration: 0.7,
-        stagger: 0.1,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '.stages-grid',
-          start: 'top 80%',
-        },
-      });
+      gsap.fromTo('.stage-card',
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1, y: 0, duration: 0.7, stagger: 0.1, ease: 'power3.out',
+          scrollTrigger: { trigger: '.stages-grid', start: 'top 80%' },
+        }
+      );
     }, sectionRef);
 
     return () => ctx.revert();
@@ -131,7 +126,7 @@ const Platform = () => {
             Complete <span className="text-[#00f0ff]">Value Realization</span>
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto">
-            Six capabilities. One unified platform. Orchestrated by Omnis to deliver 
+            Six capabilities. One unified platform. Orchestrated by Omnis to deliver
             measurable business outcomes across the entire value chain.
           </p>
         </div>
@@ -148,8 +143,8 @@ const Platform = () => {
                   Omnis — The Orchestration Layer
                 </h3>
                 <p className="text-gray-400 text-sm">
-                  Omnis is FalconDive. It connects all four stages of value realization, 
-                  providing a single pane of glass for detection, diagnostics, action, and monitoring. 
+                  Omnis is FalconDive. It connects all four stages of value realization,
+                  providing a single pane of glass for detection, diagnostics, action, and monitoring.
                   The fabric that ties your entire value journey together.
                 </p>
               </div>
@@ -160,8 +155,8 @@ const Platform = () => {
         {/* Value Stages Grid */}
         <div className="stages-grid grid grid-cols-1 lg:grid-cols-2 gap-6">
           {valueStages.map((stage, i) => (
-            <div 
-              key={i} 
+            <div
+              key={i}
               className={`stage-card bg-gradient-to-br ${stage.color} border ${stage.borderColor} rounded-2xl overflow-hidden`}
             >
               {/* Stage Header */}
@@ -190,8 +185,8 @@ const Platform = () => {
                   Capabilities
                 </span>
                 {stage.products.map((product, j) => (
-                  <div 
-                    key={j} 
+                  <div
+                    key={j}
                     className="flex items-start gap-3 bg-[#0a0a0f]/50 rounded-xl p-4 hover:bg-[#0a0a0f]/70 transition-colors"
                   >
                     <div className={`w-10 h-10 ${stage.bgColor} rounded-lg flex items-center justify-center flex-shrink-0`}>
@@ -222,7 +217,7 @@ const Platform = () => {
               <h4 className="font-display font-bold">Managed Value Recovery</h4>
             </div>
             <p className="text-gray-400 text-sm">
-              Our team operates the platform for you. AI agents work 24/7 to detect issues, 
+              Our team operates the platform for you. AI agents work 24/7 to detect issues,
               surface recommendations, and deliver executive-ready intelligence.
             </p>
           </div>
@@ -235,7 +230,7 @@ const Platform = () => {
               <h4 className="font-display font-bold">Self-Serve Decision Intelligence</h4>
             </div>
             <p className="text-gray-400 text-sm">
-              Your team directly interacts with data through intuitive tools. Ask questions, 
+              Your team directly interacts with data through intuitive tools. Ask questions,
               build segments, set alerts, and generate outcome reports.
             </p>
           </div>

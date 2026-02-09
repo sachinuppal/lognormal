@@ -14,16 +14,16 @@ const CTA = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.from(contentRef.current, {
-        opacity: 0,
-        y: 40,
-        duration: 1,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: contentRef.current,
-          start: 'top 80%',
-        },
-      });
+      if (contentRef.current) {
+        gsap.set(contentRef.current, { opacity: 1, y: 0 });
+      }
+      gsap.fromTo(contentRef.current,
+        { opacity: 0, y: 40 },
+        {
+          opacity: 1, y: 0, duration: 1, ease: 'power3.out',
+          scrollTrigger: { trigger: contentRef.current, start: 'top 80%' },
+        }
+      );
     }, sectionRef);
 
     return () => ctx.revert();

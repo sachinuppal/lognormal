@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Database, Brain, Wrench, FileSpreadsheet, ArrowRight, Target } from 'lucide-react';
+import { Database, Brain, Wrench, FileSpreadsheet, Target } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -16,42 +16,31 @@ const Analysis = () => {
       gsap.set('.pattern-box', { opacity: 1, y: 0 });
 
       // Problem items animation
-      gsap.from('.problem-item', {
-        opacity: 0,
-        x: -30,
-        duration: 0.7,
-        stagger: 0.1,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '.problems-list',
-          start: 'top 85%',
-          toggleActions: 'play none none none',
-        },
-      });
+      gsap.fromTo('.problem-item',
+        { opacity: 0, x: -30 },
+        {
+          opacity: 1, x: 0, duration: 0.7, stagger: 0.1, ease: 'power3.out',
+          scrollTrigger: { trigger: '.problems-list', start: 'top 85%', toggleActions: 'play none none none' },
+        }
+      );
 
       // Image animation
-      gsap.from('.analysis-image', {
-        opacity: 0,
-        x: 50,
-        duration: 1,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '.analysis-image',
-          start: 'top 85%',
-        },
-      });
+      gsap.fromTo('.analysis-image',
+        { opacity: 0, x: 50 },
+        {
+          opacity: 1, x: 0, duration: 1, ease: 'power3.out',
+          scrollTrigger: { trigger: '.analysis-image', start: 'top 85%' },
+        }
+      );
 
       // Pattern box animation
-      gsap.from('.pattern-box', {
-        opacity: 0,
-        y: 20,
-        duration: 0.8,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '.pattern-box',
-          start: 'top 90%',
-        },
-      });
+      gsap.fromTo('.pattern-box',
+        { opacity: 0, y: 20 },
+        {
+          opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
+          scrollTrigger: { trigger: '.pattern-box', start: 'top 90%' },
+        }
+      );
     }, sectionRef);
 
     return () => ctx.revert();
@@ -113,7 +102,7 @@ const Analysis = () => {
               <span className="text-[#ff4444]">Find the Why</span>
             </h2>
             <p className="text-gray-400 mb-6">
-              Detection tells you <em>what</em> is leaking. Diagnostics tells you <em>why</em>. 
+              Detection tells you <em>what</em> is leaking. Diagnostics tells you <em>why</em>.
               Converse AI conducts multi-perspective root cause analysis through natural language conversations.
             </p>
 
@@ -137,7 +126,7 @@ const Analysis = () => {
                       {problem.description}
                     </p>
                   </div>
-                  <ArrowRight className="w-4 h-4 text-gray-600 group-hover:text-[#00f0ff] transition-colors flex-shrink-0" />
+
                 </div>
               ))}
             </div>

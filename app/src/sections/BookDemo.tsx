@@ -14,31 +14,22 @@ const BookDemo = () => {
     const ctx = gsap.context(() => {
       gsap.set('.demo-content', { opacity: 1, y: 0 });
       gsap.set('.cert-badge', { opacity: 1, y: 0 });
-      
-      gsap.from('.demo-content', {
-        opacity: 0,
-        y: 50,
-        duration: 0.8,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top 80%',
-          toggleActions: 'play none none none',
-        },
-      });
 
-      gsap.from('.cert-badge', {
-        opacity: 0,
-        y: 30,
-        duration: 0.6,
-        stagger: 0.1,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '.cert-badges',
-          start: 'top 85%',
-          toggleActions: 'play none none none',
-        },
-      });
+      gsap.fromTo('.demo-content',
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
+          scrollTrigger: { trigger: sectionRef.current, start: 'top 80%', toggleActions: 'play none none none' },
+        }
+      );
+
+      gsap.fromTo('.cert-badge',
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: 'power3.out',
+          scrollTrigger: { trigger: '.cert-badges', start: 'top 85%', toggleActions: 'play none none none' },
+        }
+      );
     }, sectionRef);
 
     return () => ctx.revert();
@@ -72,7 +63,7 @@ const BookDemo = () => {
             <span className="font-mono text-xs tracking-[0.2em] text-[#00f0ff]/60 mb-4 block">
               [BOOK DEMO] SCHEDULE_WALKTHROUGH
             </span>
-            
+
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
               See FalconDive in
               <br />
@@ -80,9 +71,9 @@ const BookDemo = () => {
                 Action
               </span>
             </h2>
-            
+
             <p className="text-gray-400 text-lg mb-8 max-w-md">
-              Schedule a personalized demo with our team. We'll show you how FalconDive 
+              Schedule a personalized demo with our team. We'll show you how FalconDive
               detects revenue leakages, diagnoses root causes, and drives measurable outcomes.
             </p>
 

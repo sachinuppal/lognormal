@@ -29,18 +29,17 @@ const Impact = () => {
         },
       });
 
-      // Stats animation
-      gsap.from(statsRef.current?.children || [], {
-        opacity: 0,
-        y: 30,
-        duration: 0.8,
-        stagger: 0.1,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: statsRef.current,
-          start: 'top 85%',
-        },
-      });
+      // Stats animation - set visible first
+      if (statsRef.current?.children) {
+        gsap.set(statsRef.current.children, { opacity: 1, y: 0 });
+      }
+      gsap.fromTo(statsRef.current?.children || [],
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1, y: 0, duration: 0.8, stagger: 0.1, ease: 'power3.out',
+          scrollTrigger: { trigger: statsRef.current, start: 'top 85%' },
+        }
+      );
 
       // Count up animations
       const countElements = document.querySelectorAll('.impact-count');
@@ -184,7 +183,7 @@ const Impact = () => {
             <span className="text-[#00f0ff]">Proven Results.</span>
           </h2>
           <p className="text-gray-400 mt-4 max-w-2xl mx-auto">
-            Revenue recovered. Margins protected. Leakages closed. 
+            Revenue recovered. Margins protected. Leakages closed.
             See what FalconDive delivers for outcome-accountable leaders.
           </p>
         </div>
@@ -273,7 +272,7 @@ const Impact = () => {
             <CheckCircle className="w-8 h-8 text-[#00f0ff] flex-shrink-0 mt-1" />
             <div>
               <p className="text-gray-300 italic mb-4">
-                "FalconDive didn't just give us dashboards—it gave us a complete value realization engine. 
+                "FalconDive didn't just give us dashboards—it gave us a complete value realization engine.
                 We went from discovering leakages to closing them in days, not months."
               </p>
               <div className="flex items-center gap-3">

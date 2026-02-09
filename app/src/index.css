@@ -42,7 +42,8 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  /* scroll-behavior removed — Lenis handles smooth scroll on home page;
+     CSS smooth scroll conflicts with instant scrollTo on route changes */
 }
 
 body {

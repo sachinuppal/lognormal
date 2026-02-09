@@ -30,61 +30,46 @@ const Solutions = () => {
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Set all elements visible first
+      gsap.set('.solutions-header', { opacity: 1, y: 0 });
       gsap.set('.persona-card', { opacity: 1, y: 0 });
       gsap.set('.b2b-section', { opacity: 1, y: 0 });
       gsap.set('.verticals-section', { opacity: 1, y: 0 });
 
       // Header animation
-      gsap.from('.solutions-header', {
-        opacity: 0,
-        y: 30,
-        duration: 0.8,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '.solutions-header',
-          start: 'top 85%',
-        },
-      });
+      gsap.fromTo('.solutions-header',
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
+          scrollTrigger: { trigger: '.solutions-header', start: 'top 85%' },
+        }
+      );
 
       // Persona cards animation
-      gsap.from('.persona-card', {
-        opacity: 0,
-        y: 50,
-        duration: 0.7,
-        stagger: 0.1,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '.personas-grid',
-          start: 'top 85%',
-          toggleActions: 'play none none none',
-        },
-      });
+      gsap.fromTo('.persona-card',
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1, y: 0, duration: 0.7, stagger: 0.1, ease: 'power3.out',
+          scrollTrigger: { trigger: '.personas-grid', start: 'top 85%', toggleActions: 'play none none none' },
+        }
+      );
 
       // B2B comparison animation
-      gsap.from('.b2b-section', {
-        opacity: 0,
-        y: 40,
-        duration: 0.8,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '.b2b-section',
-          start: 'top 85%',
-          toggleActions: 'play none none none',
-        },
-      });
+      gsap.fromTo('.b2b-section',
+        { opacity: 0, y: 40 },
+        {
+          opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
+          scrollTrigger: { trigger: '.b2b-section', start: 'top 85%', toggleActions: 'play none none none' },
+        }
+      );
 
       // Vertical tabs animation
-      gsap.from('.verticals-section', {
-        opacity: 0,
-        y: 40,
-        duration: 0.8,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '.verticals-section',
-          start: 'top 85%',
-          toggleActions: 'play none none none',
-        },
-      });
+      gsap.fromTo('.verticals-section',
+        { opacity: 0, y: 40 },
+        {
+          opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
+          scrollTrigger: { trigger: '.verticals-section', start: 'top 85%', toggleActions: 'play none none none' },
+        }
+      );
     }, sectionRef);
 
     return () => ctx.revert();

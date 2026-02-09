@@ -149,6 +149,13 @@ const About = () => {
       image: 'https://d6jocfs79qs7r.cloudfront.net/website/teams/7-Piyusha.png',
       linkedin: 'https://www.linkedin.com/in/piyusha-jain-9b3696a2/'
     },
+    {
+      name: 'Navneeth Srinivas',
+      role: 'Sr. Vice President',
+      exp: 'Ex- Ivy Comptech, Games24x7, Bunga 365, PokerHigh',
+      image: '/images/navneeth-srinivas.jpg',
+      linkedin: '#'
+    },
   ];
 
   return (

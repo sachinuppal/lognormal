@@ -13,32 +13,24 @@ const Problem = () => {
       // Set visible first
       gsap.set('.problem-card', { opacity: 1, y: 0 });
       gsap.set('.terminal-box', { opacity: 1, y: 0 });
-      
+
       // Cards stagger animation
-      gsap.from('.problem-card', {
-        opacity: 0,
-        y: 50,
-        duration: 0.8,
-        stagger: 0.15,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '.problem-cards-grid',
-          start: 'top 85%',
-          toggleActions: 'play none none none',
-        },
-      });
+      gsap.fromTo('.problem-card',
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1, y: 0, duration: 0.8, stagger: 0.15, ease: 'power3.out',
+          scrollTrigger: { trigger: '.problem-cards-grid', start: 'top 85%', toggleActions: 'play none none none' },
+        }
+      );
 
       // Terminal animation
-      gsap.from('.terminal-box', {
-        opacity: 0,
-        y: 30,
-        duration: 1,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '.terminal-box',
-          start: 'top 90%',
-        },
-      });
+      gsap.fromTo('.terminal-box',
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1, y: 0, duration: 1, ease: 'power3.out',
+          scrollTrigger: { trigger: '.terminal-box', start: 'top 90%' },
+        }
+      );
 
       // Count up animation for numbers
       const countElements = document.querySelectorAll('.count-up');
@@ -141,17 +133,17 @@ const Problem = () => {
         <div className="relative w-[350px] h-[350px] md:w-[450px] md:h-[450px]">
           {/* Outer Ring */}
           <div className="absolute inset-0 border-2 border-[#ff4444]/30 rounded-full animate-spin" style={{ animationDuration: '20s' }} />
-          
+
           {/* Middle Ring (Dashed) */}
           <div className="absolute inset-8 border border-[#ff4444]/40 rounded-full border-dashed animate-spin" style={{ animationDuration: '15s', animationDirection: 'reverse' }} />
-          
+
           {/* Inner Ring */}
           <div className="absolute inset-16 border-2 border-[#ffb800]/50 rounded-full" />
-          
+
           {/* Crosshairs */}
           <div className="absolute top-0 left-1/2 w-px h-full bg-gradient-to-b from-transparent via-[#ff4444]/30 to-transparent" />
           <div className="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#ff4444]/30 to-transparent" />
-          
+
           {/* Center Target */}
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
             <div className="w-4 h-4 bg-[#ffb800] rounded-full animate-pulse" />
@@ -179,7 +171,7 @@ const Problem = () => {
           </h2>
           <div className="w-full max-w-xl h-px bg-gradient-to-r from-transparent via-[#ff4444] to-transparent mx-auto mb-4" />
           <p className="text-gray-400 max-w-2xl mx-auto text-sm">
-            Our AI continuously scans your operations like a radar, detecting revenue 
+            Our AI continuously scans your operations like a radar, detecting revenue
             leakages before they compound and impact your bottom line.
           </p>
         </div>
@@ -189,11 +181,10 @@ const Problem = () => {
           {leakageData.map((item, index) => (
             <div
               key={index}
-              className={`problem-card group relative bg-[#1a1a24]/90 backdrop-blur-sm border ${
-                item.critical
+              className={`problem-card group relative bg-[#1a1a24]/90 backdrop-blur-sm border ${item.critical
                   ? 'border-[#ff4444]'
                   : 'border-gray-800 hover:border-[#ff4444]/50'
-              } p-5 rounded-xl transition-all duration-300 hover:-translate-y-1`}
+                } p-5 rounded-xl transition-all duration-300 hover:-translate-y-1`}
             >
               {item.critical && (
                 <div className="absolute top-0 right-0 bg-[#ff4444] text-black text-[10px] font-mono px-2 py-1 rounded-bl font-bold">
@@ -210,13 +201,12 @@ const Problem = () => {
 
               <div className="flex items-center gap-2 mb-2">
                 <item.icon
-                  className={`w-4 h-4 ${
-                    item.critical ? 'text-[#ff4444]' : 'text-gray-500'
-                  }`}
+                  className={`w-4 h-4 ${item.critical ? 'text-[#ff4444]' : 'text-gray-500'
+                    }`}
                 />
                 <div className="text-2xl md:text-3xl font-display font-bold text-white">
-                  <span 
-                    className="count-up" 
+                  <span
+                    className="count-up"
                     data-target={item.value}
                     data-prefix={item.prefix}
                     data-suffix={item.suffix}
@@ -232,11 +222,10 @@ const Problem = () => {
 
               <div className="h-1 w-full bg-gray-800 rounded overflow-hidden">
                 <div
-                  className={`h-full ${
-                    item.critical
+                  className={`h-full ${item.critical
                       ? 'bg-[#ff4444] animate-pulse'
                       : 'bg-gradient-to-r from-[#ff4444] to-[#ffb800]'
-                  }`}
+                    }`}
                   style={{ width: `${item.progress}%` }}
                 />
               </div>

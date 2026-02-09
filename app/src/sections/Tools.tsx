@@ -28,18 +28,13 @@ const Tools = () => {
       gsap.set(cards, { opacity: 1, y: 0 });
 
       // Cards stagger animation on scroll
-      gsap.from(cards, {
-        opacity: 0,
-        y: 50,
-        duration: 0.8,
-        stagger: 0.1,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: gridRef.current,
-          start: 'top 85%',
-          toggleActions: 'play none none none',
-        },
-      });
+      gsap.fromTo(cards,
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1, y: 0, duration: 0.8, stagger: 0.1, ease: 'power3.out',
+          scrollTrigger: { trigger: gridRef.current, start: 'top 85%', toggleActions: 'play none none none' },
+        }
+      );
     }, sectionRef);
 
     return () => ctx.revert();
@@ -171,7 +166,7 @@ const Tools = () => {
             </span>
           </h2>
           <p className="text-gray-400 mt-4 max-w-2xl mx-auto">
-            Each tool powers a stage in the value realization journey. Together, 
+            Each tool powers a stage in the value realization journey. Together,
             they convert detection into measurable outcomes.
           </p>
         </div>
@@ -187,7 +182,7 @@ const Tools = () => {
                 Omnis — The Orchestration Layer
               </h3>
               <p className="text-gray-400 text-sm">
-                Omnis connects all six capabilities, providing a single pane of glass 
+                Omnis connects all six capabilities, providing a single pane of glass
                 for the entire value realization journey. This is FalconDive.
               </p>
             </div>

@@ -16,44 +16,31 @@ const Deployment = () => {
       gsap.set('.compliance-badge', { opacity: 1, y: 0 });
 
       // Cards animation with stagger
-      gsap.from('.cloud-card', {
-        opacity: 0,
-        y: 50,
-        scale: 0.95,
-        duration: 0.7,
-        stagger: 0.1,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '.cloud-cards-grid',
-          start: 'top 85%',
-          toggleActions: 'play none none none',
-        },
-      });
+      gsap.fromTo('.cloud-card',
+        { opacity: 0, y: 50, scale: 0.95 },
+        {
+          opacity: 1, y: 0, scale: 1, duration: 0.7, stagger: 0.1, ease: 'power3.out',
+          scrollTrigger: { trigger: '.cloud-cards-grid', start: 'top 85%', toggleActions: 'play none none none' },
+        }
+      );
 
       // On-prem banner animation
-      gsap.from('.onprem-banner', {
-        opacity: 0,
-        y: 30,
-        duration: 0.8,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '.onprem-banner',
-          start: 'top 90%',
-        },
-      });
+      gsap.fromTo('.onprem-banner',
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
+          scrollTrigger: { trigger: '.onprem-banner', start: 'top 90%' },
+        }
+      );
 
       // Compliance badges animation
-      gsap.from('.compliance-badge', {
-        opacity: 0,
-        y: 15,
-        duration: 0.5,
-        stagger: 0.08,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: '.compliance-badges',
-          start: 'top 90%',
-        },
-      });
+      gsap.fromTo('.compliance-badge',
+        { opacity: 0, y: 15 },
+        {
+          opacity: 1, y: 0, duration: 0.5, stagger: 0.08, ease: 'power2.out',
+          scrollTrigger: { trigger: '.compliance-badges', start: 'top 90%' },
+        }
+      );
 
       // Status dots pulse
       gsap.to('.status-dot', {
@@ -127,11 +114,11 @@ const Deployment = () => {
 
       {/* Animated Grid Lines */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div 
+        <div
           className="absolute top-1/3 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#00f0ff]/15 to-transparent"
           style={{ animation: 'scan-line 8s linear infinite' }}
         />
-        <div 
+        <div
           className="absolute top-2/3 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#00f0ff]/15 to-transparent"
           style={{ animation: 'scan-line 8s linear infinite', animationDelay: '4s' }}
         />
@@ -159,7 +146,7 @@ const Deployment = () => {
             <span className="text-[#00f0ff]">With Your Existing Stack</span>
           </h2>
           <p className="text-gray-400 mt-3 max-w-xl mx-auto text-sm">
-            FalconDive layers on top of your existing BI platform. No rip-and-replace. 
+            FalconDive layers on top of your existing BI platform. No rip-and-replace.
             Just add the AI-driven action layer your current tools lack.
           </p>
         </div>
@@ -172,8 +159,8 @@ const Deployment = () => {
             </div>
             <div>
               <p className="text-sm text-gray-300">
-                <span className="text-[#00f0ff] font-bold">Already have BI?</span> Perfect. 
-                FalconDive adds the AI-driven decision intelligence layer that turns 
+                <span className="text-[#00f0ff] font-bold">Already have BI?</span> Perfect.
+                FalconDive adds the AI-driven decision intelligence layer that turns
                 passive analytics into active value realization.
               </p>
             </div>
@@ -188,10 +175,10 @@ const Deployment = () => {
               className="cloud-card group relative bg-[#1a1a24] border border-gray-800 hover:border-opacity-50 transition-all duration-500 hover:scale-105 hover:-translate-y-1 rounded-xl overflow-hidden"
             >
               {/* Glow Effect */}
-              <div 
+              <div
                 className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-500 pointer-events-none"
-                style={{ 
-                  background: `radial-gradient(circle at center, ${provider.color}, transparent 70%)` 
+                style={{
+                  background: `radial-gradient(circle at center, ${provider.color}, transparent 70%)`
                 }}
               />
 
@@ -208,7 +195,7 @@ const Deployment = () => {
               <div className="relative p-4 pt-5">
                 {/* Icon */}
                 <div className="flex justify-center mb-2">
-                  <provider.icon 
+                  <provider.icon
                     className="w-6 h-6 transition-transform group-hover:scale-110"
                     style={{ color: provider.color }}
                   />
@@ -234,7 +221,7 @@ const Deployment = () => {
                         className="status-dot w-1.5 h-1.5 rounded-full"
                         style={{ backgroundColor: provider.color }}
                       />
-                      <span 
+                      <span
                         className="font-bold"
                         style={{ color: provider.color }}
                       >
@@ -276,7 +263,7 @@ const Deployment = () => {
                 On-Prem Installations in Your Private Cloud
               </h4>
               <p className="text-gray-400 text-xs leading-relaxed">
-                Data Never Leaves Your Systems. Deploy FalconDive entirely within your own 
+                Data Never Leaves Your Systems. Deploy FalconDive entirely within your own
                 infrastructure with complete air-gapped security.
               </p>
               <div className="mt-2 flex flex-wrap gap-1.5">
@@ -328,7 +315,7 @@ const Deployment = () => {
               <circle cx="280" cy="35" r="6" fill="#ef4444" />
               <circle cx="360" cy="35" r="6" fill="#10b981" />
             </svg>
-            
+
             {/* Center Label */}
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 mt-4">
               <div className="bg-black/90 border border-[#00f0ff]/40 px-3 py-1.5 rounded-lg">
