@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { TrendingUp, DollarSign, Shield, Zap, ArrowRight, CheckCircle } from 'lucide-react';
@@ -240,9 +241,9 @@ const Impact = () => {
         {/* Case Studies - Outcome Led */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {caseStudies.map((study, index) => (
-            <a
+            <Link
               key={index}
-              href={study.link}
+              to={study.link}
               className="group relative overflow-hidden rounded-lg bg-[#1a1a24] border border-gray-800 p-8 hover:border-[#00f0ff]/50 transition-all cursor-pointer"
             >
               <div className="absolute top-0 right-0 bg-[#00f0ff] text-black text-xs font-mono px-3 py-1 rounded-bl">
@@ -262,7 +263,7 @@ const Impact = () => {
                 <span>See Value Journey</span>
                 <ArrowRight className="w-4 h-4" />
               </div>
-            </a>
+            </Link>
           ))}
         </div>
 
