@@ -28,7 +28,7 @@ const teamMembers = [
             'Ex-PokerHigh',
         ],
         linkedIn: '',
-        image: '',
+        image: 'https://www.falcondive.io/images/navneeth-srinivas.jpg',
     },
     {
         name: 'Vamsi Chandra',
