@@ -31,8 +31,8 @@ export default async function handler(req: any, res: any) {
         timestamp,
     } = req.body;
 
-    // Validate required fields
-    if (!name || !email || !company || !industry || !role || !seniority) {
+    // Validate required fields — only email is mandatory on the frontend
+    if (!email || !industry || !role || !seniority) {
         return res.status(400).json({ error: 'Missing required fields' });
     }
 
@@ -41,7 +41,10 @@ export default async function handler(req: any, res: any) {
         return res.status(500).json({ error: 'Email service not configured. Set RESEND_API_KEY in Vercel environment variables.' });
     }
 
-    const subject = `[FalconDive Lead] ${company} — ${name} (${industry})${caseStudyName && caseStudyName !== 'N/A' ? ` [${caseStudyName}]` : ''}`;
+    const displayName = name || 'Anonymous';
+    const displayCompany = company || 'Not provided';
+
+    const subject = `[FalconDive Lead] ${displayName} (${industry})${caseStudyName && caseStudyName !== 'N/A' ? ` [${caseStudyName}]` : ''}`;
 
     const htmlBody = `
 <div style="font-family: 'Courier New', monospace; background: #0a0e17; color: #e0e0e0; padding: 32px; border-radius: 12px; max-width: 600px;">
@@ -52,9 +55,9 @@ export default async function handler(req: any, res: any) {
     <div style="margin-bottom: 24px;">
         <h2 style="color: #00e5ff; font-size: 14px; margin: 0 0 12px 0;">CONTACT INFORMATION</h2>
         <table style="font-size: 14px; line-height: 1.8;">
-            <tr><td style="color: #888; padding-right: 16px;">Name:</td><td style="color: #fff;">${name}</td></tr>
+            <tr><td style="color: #888; padding-right: 16px;">Name:</td><td style="color: #fff;">${displayName}</td></tr>
             <tr><td style="color: #888; padding-right: 16px;">Email:</td><td style="color: #fff;"><a href="mailto:${email}" style="color: #00e5ff;">${email}</a></td></tr>
-            <tr><td style="color: #888; padding-right: 16px;">Company:</td><td style="color: #fff;">${company}</td></tr>
+            <tr><td style="color: #888; padding-right: 16px;">Company:</td><td style="color: #fff;">${displayCompany}</td></tr>
             <tr><td style="color: #888; padding-right: 16px;">Phone:</td><td style="color: #fff;">${phone || 'Not provided'}</td></tr>
         </table>
     </div>
