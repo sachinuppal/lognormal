@@ -104,7 +104,7 @@ const BookDemo = () => {
               className="group relative px-8 py-4 bg-[#00f0ff] text-black font-mono font-bold tracking-wider rounded-lg hover:scale-105 transition-transform flex items-center gap-3"
             >
               <Calendar className="w-5 h-5" />
-              <span>BOOK DEMO NOW</span>
+              <span>START YOUR VALUE ASSESSMENT</span>
             </button>
           </div>
 

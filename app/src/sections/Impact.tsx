@@ -1,8 +1,9 @@
-import { useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { TrendingUp, DollarSign, Shield, Zap, ArrowRight, CheckCircle } from 'lucide-react';
+import LeadCaptureModal, { isLeadCaptureCompleted } from '../components/LeadCaptureModal';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -10,6 +11,9 @@ const Impact = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const shockwaveRef = useRef<HTMLDivElement>(null);
   const statsRef = useRef<HTMLDivElement>(null);
+  const [isLeadModalOpen, setIsLeadModalOpen] = useState(false);
+  const [selectedCaseStudy, setSelectedCaseStudy] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -241,9 +245,17 @@ const Impact = () => {
         {/* Case Studies - Outcome Led */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {caseStudies.map((study, index) => (
-            <Link
+            <div
               key={index}
-              to={study.link}
+              onClick={() => {
+                if (isLeadCaptureCompleted()) {
+                  // User already filled the form — go directly to case study
+                  navigate(study.link);
+                } else {
+                  setSelectedCaseStudy(study.title);
+                  setIsLeadModalOpen(true);
+                }
+              }}
               className="group relative overflow-hidden rounded-lg bg-[#1a1a24] border border-gray-800 p-8 hover:border-[#00f0ff]/50 transition-all cursor-pointer"
             >
               <div className="absolute top-0 right-0 bg-[#00f0ff] text-black text-xs font-mono px-3 py-1 rounded-bl">
@@ -263,7 +275,7 @@ const Impact = () => {
                 <span>See Value Journey</span>
                 <ArrowRight className="w-4 h-4" />
               </div>
-            </Link>
+            </div>
           ))}
         </div>
 
@@ -278,16 +290,23 @@ const Impact = () => {
               </p>
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-[#00f0ff]/20 rounded-full flex items-center justify-center">
-                  <span className="text-[#00f0ff] font-bold text-sm">MP</span>
+                  <span className="text-[#00f0ff] font-bold text-sm">SB</span>
                 </div>
                 <div>
-                  <p className="font-display font-bold text-sm">Mayank Pachauri</p>
-                  <p className="text-gray-500 text-xs font-mono">Founder & CEO, FalconDive</p>
+                  <p className="font-display font-bold text-sm">Senior Executive</p>
+                  <p className="text-gray-500 text-xs font-mono">CEO, Sports Betting Company</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        {/* Lead Capture Modal */}
+        <LeadCaptureModal
+          isOpen={isLeadModalOpen}
+          onClose={() => setIsLeadModalOpen(false)}
+          triggerAction="Case Study Download"
+          caseStudyName={selectedCaseStudy}
+        />
       </div>
     </section>
   );

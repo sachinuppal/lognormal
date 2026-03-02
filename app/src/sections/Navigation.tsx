@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Menu, X, Zap, Calendar } from 'lucide-react';
+import { Menu, X, Zap, Target } from 'lucide-react';
 import CalendlyModal from '../components/CalendlyModal';
+import LeadCaptureModal from '../components/LeadCaptureModal';
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isCalendlyOpen, setIsCalendlyOpen] = useState(false);
+  const [isLeadModalOpen, setIsLeadModalOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   const isHomePage = location.pathname === '/';
@@ -25,6 +27,7 @@ const Navigation = () => {
     { href: '#solutions', label: 'SOLUTIONS', isAnchor: true },
     { href: '#impact', label: 'IMPACT', isAnchor: true },
     { href: '#deployment', label: 'DEPLOY', isAnchor: true },
+    { href: '/case-studies', label: 'CASE STUDIES', isAnchor: false },
     { href: '/pricing', label: 'PRICING', isAnchor: false },
     { href: '/about', label: 'ABOUT', isAnchor: false },
     { href: '/architecture', label: 'ARCHITECTURE', isAnchor: false },
@@ -59,8 +62,8 @@ const Navigation = () => {
   return (
     <nav
       className={`fixed top-0 w-full z-50 transition-all duration-500 ${isScrolled
-          ? 'bg-black/90 backdrop-blur-md border-b border-gray-800'
-          : 'border-b border-transparent'
+        ? 'bg-black/90 backdrop-blur-md border-b border-gray-800'
+        : 'border-b border-transparent'
         }`}
     >
       <div className="max-w-7xl mx-auto px-4 py-2 flex justify-between items-center">
@@ -114,11 +117,11 @@ const Navigation = () => {
             LOGIN
           </Link>
           <button
-            onClick={() => setIsCalendlyOpen(true)}
+            onClick={() => setIsLeadModalOpen(true)}
             className="px-2 py-1.5 bg-[#00f0ff]/10 border border-[#00f0ff]/50 text-[#00f0ff] font-mono text-[10px] hover:bg-[#00f0ff]/20 transition-all animate-pulse-glow rounded whitespace-nowrap flex items-center gap-1"
           >
-            <Calendar className="w-3 h-3" />
-            BOOK DEMO
+            <Target className="w-3 h-3" />
+            UNCOVER REVENUE LEAKAGES
           </button>
         </div>
 
@@ -168,12 +171,12 @@ const Navigation = () => {
               <button
                 onClick={() => {
                   setIsMobileMenuOpen(false);
-                  setIsCalendlyOpen(true);
+                  setIsLeadModalOpen(true);
                 }}
                 className="inline-flex items-center gap-2 px-3 py-2 bg-[#00f0ff]/10 border border-[#00f0ff]/50 text-[#00f0ff] font-mono text-xs rounded"
               >
-                <Calendar className="w-3 h-3" />
-                BOOK DEMO
+                <Target className="w-3 h-3" />
+                UNCOVER REVENUE LEAKAGES
               </button>
             </div>
           </div>
@@ -182,6 +185,8 @@ const Navigation = () => {
 
       {/* Calendly Modal */}
       <CalendlyModal isOpen={isCalendlyOpen} onClose={() => setIsCalendlyOpen(false)} />
+      {/* Lead Capture Modal */}
+      <LeadCaptureModal isOpen={isLeadModalOpen} onClose={() => setIsLeadModalOpen(false)} triggerAction="Nav CTA" />
     </nav>
   );
 };

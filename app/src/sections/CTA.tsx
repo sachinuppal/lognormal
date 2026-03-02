@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { TrendingUp, Shield, CheckCircle, Calendar } from 'lucide-react';
-import CalendlyModal from '../components/CalendlyModal';
+import { TrendingUp, Shield, CheckCircle, Target } from 'lucide-react';
+import LeadCaptureModal from '../components/LeadCaptureModal';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -117,9 +117,9 @@ const CTA = () => {
             onClick={() => setIsModalOpen(true)}
             className="group relative px-8 py-4 bg-[#00f0ff] text-black font-mono font-bold tracking-wider rounded-lg overflow-hidden hover:scale-105 transition-transform flex items-center justify-center gap-2"
           >
-            <Calendar className="w-5 h-5" />
+            <Target className="w-5 h-5" />
             <span className="relative z-10 flex items-center gap-2">
-              BOOK DEMO
+              UNCOVER YOUR REVENUE LEAKAGES
             </span>
             <div className="absolute inset-0 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
           </button>
@@ -127,7 +127,7 @@ const CTA = () => {
             onClick={() => setIsModalOpen(true)}
             className="px-8 py-4 border border-gray-700 hover:border-[#00f0ff] font-mono text-xs transition-colors rounded-lg text-gray-400 hover:text-white flex items-center justify-center gap-2"
           >
-            SEE HOW WE RECOVER REVENUE
+            START YOUR VALUE ASSESSMENT — FREE
           </button>
         </div>
 
@@ -169,11 +169,11 @@ const CTA = () => {
         </p>
       </div>
 
-      {/* Calendly Modal */}
-      <CalendlyModal
+      {/* Lead Capture Modal */}
+      <LeadCaptureModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        prefillEmail={email}
+        triggerAction="CTA Section"
       />
     </section>
   );

@@ -7,14 +7,21 @@ import Lenis from 'lenis';
 // Home Page Sections
 import Navigation from './sections/Navigation';
 import Hero from './sections/Hero';
+import ClientLogos from './sections/ClientLogos';
 import ValueFlow from './sections/ValueFlow';
 import Problem from './sections/Problem';
+import GamingVeterans from './sections/GamingVeterans';
 import Analysis from './sections/Analysis';
 import Platform from './sections/Platform';
 import Tools from './sections/Tools';
+import MetricsDashboard from './sections/MetricsDashboard';
 import Impact from './sections/Impact';
+import Testimonials from './sections/Testimonials';
+import TeamCredibility from './sections/TeamCredibility';
 import Deployment from './sections/Deployment';
 import Solutions from './sections/Solutions';
+
+import GlobalPresence from './sections/GlobalPresence';
 import CTA from './sections/CTA';
 import BookDemo from './sections/BookDemo';
 import Footer from './sections/Footer';
@@ -26,6 +33,8 @@ import Architecture from './pages/Architecture';
 import CaseStudyCEE from './pages/CaseStudyCEE';
 import CaseStudyGermany from './pages/CaseStudyGermany';
 import CaseStudySouthEurope from './pages/CaseStudySouthEurope';
+import CaseStudies from './pages/CaseStudies';
+import ImpactPage from './pages/ImpactPage';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import DataProcessingAgreement from './pages/DataProcessingAgreement';
 
@@ -116,14 +125,21 @@ const HomePage = () => {
 
       <main>
         <Hero />
+        <ClientLogos />
         <ValueFlow />
         <Problem />
+        <GamingVeterans />
         <Analysis />
         <Platform />
         <Tools />
+        <MetricsDashboard />
         <Impact />
+        <Testimonials />
+        <TeamCredibility />
         <Deployment />
         <Solutions />
+
+        <GlobalPresence />
         <CTA />
         <BookDemo />
       </main>
@@ -153,6 +169,8 @@ function App() {
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/about" element={<About />} />
           <Route path="/architecture" element={<Architecture />} />
+          <Route path="/case-studies" element={<CaseStudies />} />
+          <Route path="/impact" element={<ImpactPage />} />
           <Route path="/case-studies/igaming-giant-cee" element={<CaseStudyCEE />} />
           <Route path="/case-studies/top-bookmarker-germany" element={<CaseStudyGermany />} />
           <Route path="/case-studies/igaming-innovators-south-europe" element={<CaseStudySouthEurope />} />
