@@ -27,7 +27,7 @@ const Navigation = () => {
     { href: '#solutions', label: 'SOLUTIONS', isAnchor: true },
     { href: '#impact', label: 'IMPACT', isAnchor: true },
     { href: '#deployment', label: 'DEPLOY', isAnchor: true },
-    { href: '/case-studies', label: 'CASE STUDIES', isAnchor: false },
+    // { href: '/case-studies', label: 'CASE STUDIES', isAnchor: false }, // Hidden per client feedback
     { href: '/pricing', label: 'PRICING', isAnchor: false },
     { href: '/about', label: 'ABOUT', isAnchor: false },
     { href: '/architecture', label: 'ARCHITECTURE', isAnchor: false },

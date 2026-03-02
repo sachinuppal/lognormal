@@ -14,9 +14,9 @@ import GamingVeterans from './sections/GamingVeterans';
 import Analysis from './sections/Analysis';
 import Platform from './sections/Platform';
 import Tools from './sections/Tools';
-import MetricsDashboard from './sections/MetricsDashboard';
+// import MetricsDashboard from './sections/MetricsDashboard'; // Hidden per client feedback
 import Impact from './sections/Impact';
-import Testimonials from './sections/Testimonials';
+// import Testimonials from './sections/Testimonials'; // Hidden per client feedback
 import TeamCredibility from './sections/TeamCredibility';
 import Deployment from './sections/Deployment';
 import Solutions from './sections/Solutions';
@@ -132,9 +132,9 @@ const HomePage = () => {
         <Analysis />
         <Platform />
         <Tools />
-        <MetricsDashboard />
+        {/* <MetricsDashboard /> Hidden per client feedback */}
         <Impact />
-        <Testimonials />
+        {/* <Testimonials /> Hidden per client feedback */}
         <TeamCredibility />
         <Deployment />
         <Solutions />

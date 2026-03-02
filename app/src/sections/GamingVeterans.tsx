@@ -5,7 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 const stats = [
-    { value: '75+', label: 'Years in iGaming & Data', suffix: '' },
+    { value: '100+', label: 'Years in iGaming & Data', suffix: '' },
     { value: '20+', label: 'Markets Across 4 Continents', suffix: '' },
     { value: '6+', label: 'Tier-1 Operators', suffix: '' },
     { value: '€500M+', label: 'Decisions Powered', suffix: '' },
