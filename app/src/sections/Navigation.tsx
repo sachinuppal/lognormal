@@ -38,14 +38,17 @@ const Navigation = () => {
       e.preventDefault();
       const targetId = link.href.replace('#', '');
       if (!isHomePage) {
-        // Navigate to home first, then scroll to section after a short delay
+        // Navigate to home first, then poll for the section to appear
         navigate('/');
-        setTimeout(() => {
+        const tryScroll = (attempts: number) => {
           const element = document.getElementById(targetId);
           if (element) {
             element.scrollIntoView({ behavior: 'smooth' });
+          } else if (attempts > 0) {
+            setTimeout(() => tryScroll(attempts - 1), 100);
           }
-        }, 300);
+        };
+        setTimeout(() => tryScroll(20), 100); // try for up to 2 seconds
       } else {
         // On home page - scroll to section directly
         const element = document.getElementById(targetId);
@@ -55,7 +58,9 @@ const Navigation = () => {
       }
       setIsMobileMenuOpen(false);
     } else {
+      // For page links, scroll to top after navigation
       setIsMobileMenuOpen(false);
+      window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
     }
   };
 

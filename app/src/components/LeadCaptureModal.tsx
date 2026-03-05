@@ -245,7 +245,7 @@ const LeadCaptureModal = ({ isOpen, onClose, triggerAction = 'General Inquiry', 
                                         <button
                                             key={ind.label}
                                             onClick={() => setData({ ...data, industry: ind.label })}
-                                            className={`p-4 rounded-xl border transition-all duration-200 text-left flex flex-col items-center gap-2 ${isSelected
+                                            className={`p-4 rounded-xl border transition-all duration-200 text-center flex flex-col items-center gap-2 ${isSelected
                                                 ? 'border-[#00e5ff]/60 bg-[#00e5ff]/10 shadow-[0_0_15px_rgba(0,229,255,0.1)]'
                                                 : 'border-gray-800 bg-[#0f1724]/60 hover:border-gray-700'
                                                 }`}

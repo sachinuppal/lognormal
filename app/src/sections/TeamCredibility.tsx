@@ -27,7 +27,7 @@ const teamMembers = [
             'Ex-Bunga 365',
             'Ex-PokerHigh',
         ],
-        linkedIn: '',
+        linkedIn: 'https://www.linkedin.com/in/navneethsrinivas/',
         image: 'https://www.falcondive.io/images/navneeth-srinivas.jpg',
     },
     {
