@@ -174,6 +174,7 @@ const CTA = () => {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         triggerAction="CTA Section"
+        prefillEmail={email}
       />
     </section>
   );

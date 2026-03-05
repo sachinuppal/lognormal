@@ -107,49 +107,57 @@ const TeamCredibility = () => {
 
                 {/* Team Cards */}
                 <div className="team-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {teamMembers.map((member, i) => (
-                        <a
-                            key={i}
-                            href={member.linkedIn}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="team-card group p-6 bg-[#0f1724]/80 border border-[#00e5ff]/10 rounded-2xl backdrop-blur-sm hover:border-[#00e5ff]/30 transition-all duration-300 text-center block"
-                        >
-                            {/* Profile badge */}
-                            <div className="font-mono text-[10px] text-gray-700 mb-4">
-                                [PROFILE] TEAM_MEMBER_{String(i + 1).padStart(2, '0')}
-                            </div>
+                    {teamMembers.map((member, i) => {
+                        const hasLinkedIn = member.linkedIn && member.linkedIn.trim() !== '';
+                        const Wrapper = hasLinkedIn ? 'a' : 'div';
+                        const wrapperProps = hasLinkedIn
+                            ? { href: member.linkedIn, target: '_blank' as const, rel: 'noopener noreferrer' }
+                            : {};
 
-                            {/* Photo */}
-                            <div className="w-24 h-24 mx-auto mb-4 rounded-full border-2 border-[#00e5ff]/30 overflow-hidden group-hover:border-[#00e5ff]/60 group-hover:shadow-[0_0_20px_rgba(0,229,255,0.2)] transition-all duration-300">
-                                <img
-                                    src={member.image}
-                                    alt={member.name}
-                                    className="w-full h-full object-cover"
-                                />
-                            </div>
+                        return (
+                            <Wrapper
+                                key={i}
+                                {...wrapperProps}
+                                className={`team-card group p-6 bg-[#0f1724]/80 border border-[#00e5ff]/10 rounded-2xl backdrop-blur-sm hover:border-[#00e5ff]/30 transition-all duration-300 text-center block ${hasLinkedIn ? 'cursor-pointer' : 'cursor-default'}`}
+                            >
+                                {/* Profile badge */}
+                                <div className="font-mono text-[10px] text-gray-700 mb-4">
+                                    [PROFILE] TEAM_MEMBER_{String(i + 1).padStart(2, '0')}
+                                </div>
 
-                            {/* Name & Title */}
-                            <h3 className="font-display text-lg font-bold text-white mb-1 group-hover:text-[#00f0ff] transition-colors">{member.name}</h3>
-                            <p className="font-mono text-xs text-[#00f0ff] mb-4">{member.title}</p>
+                                {/* Photo */}
+                                <div className="w-24 h-24 mx-auto mb-4 rounded-full border-2 border-[#00e5ff]/30 overflow-hidden group-hover:border-[#00e5ff]/60 group-hover:shadow-[0_0_20px_rgba(0,229,255,0.2)] transition-all duration-300">
+                                    <img
+                                        src={member.image}
+                                        alt={member.name}
+                                        className="w-full h-full object-cover"
+                                    />
+                                </div>
 
-                            {/* Background points */}
-                            <div className="space-y-2 text-left mb-4">
-                                {member.background.map((point, pi) => (
-                                    <div key={pi} className="flex items-center gap-2">
-                                        <span className="text-[#00f0ff] text-xs">▸</span>
-                                        <span className="text-gray-400 text-xs">{point}</span>
+                                {/* Name & Title */}
+                                <h3 className="font-display text-lg font-bold text-white mb-1 group-hover:text-[#00f0ff] transition-colors">{member.name}</h3>
+                                <p className="font-mono text-xs text-[#00f0ff] mb-4">{member.title}</p>
+
+                                {/* Background points */}
+                                <div className="space-y-2 text-left mb-4">
+                                    {member.background.map((point, pi) => (
+                                        <div key={pi} className="flex items-center gap-2">
+                                            <span className="text-[#00f0ff] text-xs">▸</span>
+                                            <span className="text-gray-400 text-xs">{point}</span>
+                                        </div>
+                                    ))}
+                                </div>
+
+                                {/* LinkedIn */}
+                                {hasLinkedIn && (
+                                    <div className="inline-flex items-center gap-1.5 text-gray-600 group-hover:text-[#00f0ff] transition-colors">
+                                        <Linkedin className="w-4 h-4" />
+                                        <span className="font-mono text-[10px]">LinkedIn</span>
                                     </div>
-                                ))}
-                            </div>
-
-                            {/* LinkedIn */}
-                            <div className="inline-flex items-center gap-1.5 text-gray-600 group-hover:text-[#00f0ff] transition-colors">
-                                <Linkedin className="w-4 h-4" />
-                                <span className="font-mono text-[10px]">LinkedIn</span>
-                            </div>
-                        </a>
-                    ))}
+                                )}
+                            </Wrapper>
+                        );
+                    })}
                 </div>
             </div>
         </section>

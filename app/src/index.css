@@ -44,6 +44,8 @@
 html {
   /* scroll-behavior removed — Lenis handles smooth scroll on home page;
      CSS smooth scroll conflicts with instant scrollTo on route changes */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 229, 255, 0.3) #0a0e17;
 }
 
 body {
@@ -64,20 +66,20 @@ body {
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--void);
+  background: #0a0e17;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--tactical);
-  border-radius: 3px;
+  background: rgba(0, 229, 255, 0.3);
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--laser);
+  background: rgba(0, 229, 255, 0.5);
 }
 
 /* Noise Texture Overlay */
@@ -311,4 +313,41 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* Scroll margin for fixed navbar offset (Issue #22) */
+[id] {
+  scroll-margin-top: 80px;
+}
+
+/* Scroll to Top Button (Issue #10) */
+.scroll-to-top {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(0, 229, 255, 0.15);
+  border: 1px solid rgba(0, 229, 255, 0.4);
+  color: #00e5ff;
+  font-size: 1.2rem;
+  cursor: pointer;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scroll-to-top:hover {
+  background: rgba(0, 229, 255, 0.3);
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Body scroll lock for modals (Issue #2) */
+body.modal-open {
+  overflow: hidden;
 }

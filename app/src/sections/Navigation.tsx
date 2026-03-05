@@ -82,7 +82,7 @@ const Navigation = () => {
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden xl:flex gap-3 text-[10px] font-mono text-gray-400">
+        <div className="hidden xl:flex gap-3 text-xs font-mono text-gray-400">
           {navLinks.map((link) => (
             link.isAnchor ? (
               <a

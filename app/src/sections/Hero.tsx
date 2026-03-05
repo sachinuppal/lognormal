@@ -190,8 +190,8 @@ const Hero = () => {
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce z-10">
-        <ChevronDown className="w-5 h-5 text-[#00f0ff]/50" />
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce z-10 pointer-events-none" aria-hidden="true" role="presentation">
+        <ChevronDown className="w-5 h-5 text-[#00f0ff]/30" />
       </div>
 
       {/* Bottom Gradient */}

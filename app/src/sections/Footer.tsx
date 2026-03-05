@@ -33,6 +33,7 @@ const Footer = () => {
 
   const legalLinks = [
     { label: 'Privacy Policy', href: '/privacy-policy' },
+    { label: 'Terms of Service', href: '/terms-of-service' },
     { label: 'Data Processing', href: '/data-processing-agreement' },
   ];
 
@@ -77,8 +78,8 @@ const Footer = () => {
             <p className="text-gray-500 text-sm mb-2 font-mono">
               AI-Powered Decision Intelligence for iGaming operators.
             </p>
-            <p className="text-gray-600 text-xs mb-4">
-              A product of <span className="text-gray-400">Lognormal Analytics</span>
+            <p className="text-gray-400 text-xs mb-4">
+              A product of <a href="https://www.lognormal.io" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-[#00f0ff] transition-colors underline">Lognormal Analytics</a>
             </p>
 
             {/* Company Registration */}
@@ -196,8 +197,8 @@ const Footer = () => {
 
         {/* Bottom Bar */}
         <div className="border-t border-gray-900 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="text-gray-700 font-mono text-xs">
-            © 2026 Lognormal Analytics. All rights reserved. | falcondive.io | lognormal.io
+          <div className="text-gray-500 font-mono text-xs">
+            © 2026 <a href="https://www.lognormal.io" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#00f0ff] transition-colors">Lognormal Analytics Pvt. Ltd.</a> All rights reserved.
           </div>
 
           {/* Social Links */}

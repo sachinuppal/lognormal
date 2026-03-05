@@ -37,6 +37,8 @@ import CaseStudies from './pages/CaseStudies';
 import ImpactPage from './pages/ImpactPage';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import DataProcessingAgreement from './pages/DataProcessingAgreement';
+import TermsOfService from './pages/TermsOfService';
+import ScrollToTopButton from './components/ScrollToTopButton';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -175,8 +177,10 @@ function App() {
           <Route path="/case-studies/top-bookmarker-germany" element={<CaseStudyGermany />} />
           <Route path="/case-studies/igaming-innovators-south-europe" element={<CaseStudySouthEurope />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-of-service" element={<TermsOfService />} />
           <Route path="/data-processing-agreement" element={<DataProcessingAgreement />} />
         </Routes>
+        <ScrollToTopButton />
         <ConsentManager />
       </Router>
     </ConsentProvider>

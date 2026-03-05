@@ -19,39 +19,13 @@ interface LeadCaptureModalProps {
     triggerAction?: string;
     triggerPage?: string;
     caseStudyName?: string;
+    prefillEmail?: string;
 }
 
-// --- Session storage helpers ---
-const SESSION_KEY = 'falcondive_lead_data';
-const SUBMITTED_KEY = 'falcondive_lead_submitted';
 
-function getSavedLeadData(): Partial<LeadData> {
-    try {
-        const saved = sessionStorage.getItem(SESSION_KEY);
-        return saved ? JSON.parse(saved) : {};
-    } catch {
-        return {};
-    }
-}
-
-function saveLeadData(data: LeadData) {
-    try {
-        sessionStorage.setItem(SESSION_KEY, JSON.stringify(data));
-    } catch { /* ignore */ }
-}
-
-function markLeadSubmitted() {
-    try {
-        sessionStorage.setItem(SUBMITTED_KEY, 'true');
-    } catch { /* ignore */ }
-}
-
+// Lead capture completion check (sessionStorage removed — always returns false)
 export function isLeadCaptureCompleted(): boolean {
-    try {
-        return sessionStorage.getItem(SUBMITTED_KEY) === 'true';
-    } catch {
-        return false;
-    }
+    return false;
 }
 
 // --- Data ---
@@ -118,53 +92,66 @@ async function sendLeadEmail(data: LeadData, triggerAction: string, triggerPage:
     }
 }
 
-// --- Compute starting step based on saved data ---
-function computeStartStep(saved: Partial<LeadData>): number {
-    if (!saved.industry) return 1;
-    if (!saved.role) return 2;
-    if (!saved.seniority) return 3;
-    if (!saved.email) return 4;
-    // All filled — jump straight to contact (step 4) so they just confirm & submit
-    return 4;
-}
-
 // --- Component ---
-const LeadCaptureModal = ({ isOpen, onClose, triggerAction = 'General Inquiry', triggerPage = window.location.href, caseStudyName }: LeadCaptureModalProps) => {
-    const saved = getSavedLeadData();
-    const [step, setStep] = useState(() => computeStartStep(saved));
+const LeadCaptureModal = ({ isOpen, onClose, triggerAction = 'General Inquiry', triggerPage = window.location.href, caseStudyName, prefillEmail }: LeadCaptureModalProps) => {
+    const [step, setStep] = useState(1);
     const [data, setData] = useState<LeadData>({
-        industry: saved.industry || '',
-        role: saved.role || '',
-        seniority: saved.seniority || '',
-        fullName: saved.fullName || '',
-        email: saved.email || '',
-        company: saved.company || '',
-        phone: saved.phone || '',
-        agreedToTerms: saved.agreedToTerms !== undefined ? saved.agreedToTerms : true,
+        industry: '',
+        role: '',
+        seniority: '',
+        fullName: '',
+        email: '',
+        company: '',
+        phone: '',
+        agreedToTerms: false,
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [emailError, setEmailError] = useState('');
 
-    // On open: restore saved data & compute start step
+    // On open: reset wizard to step 1, lock body scroll
+    // Issue #3 fix: always reset state instead of restoring from sessionStorage
+    // Issue #2 fix: lock body scroll when modal is open
     useEffect(() => {
         if (isOpen) {
-            const s = getSavedLeadData();
-            const merged: LeadData = {
-                industry: s.industry || '',
-                role: s.role || '',
-                seniority: s.seniority || '',
-                fullName: s.fullName || '',
-                email: s.email || '',
-                company: s.company || '',
-                phone: s.phone || '',
-                agreedToTerms: s.agreedToTerms !== undefined ? s.agreedToTerms : true,
-            };
-            setData(merged);
-            setStep(computeStartStep(s));
+            // Reset wizard state fresh every time
+            setStep(1);
+            setData({
+                industry: '',
+                role: '',
+                seniority: '',
+                fullName: '',
+                email: prefillEmail || '',
+                company: '',
+                phone: '',
+                agreedToTerms: false,
+            });
             setEmailError('');
             setIsSubmitting(false);
+
+            // Lock body scroll
+            const scrollY = window.scrollY;
+            document.body.style.position = 'fixed';
+            document.body.style.top = `-${scrollY}px`;
+            document.body.style.width = '100%';
+            document.body.style.overflow = 'hidden';
+        } else {
+            // Restore body scroll
+            const scrollY = document.body.style.top;
+            document.body.style.position = '';
+            document.body.style.top = '';
+            document.body.style.width = '';
+            document.body.style.overflow = '';
+            window.scrollTo(0, parseInt(scrollY || '0') * -1);
         }
-    }, [isOpen]);
+
+        return () => {
+            // Cleanup: ensure body scroll is restored if component unmounts while open
+            document.body.style.position = '';
+            document.body.style.top = '';
+            document.body.style.width = '';
+            document.body.style.overflow = '';
+        };
+    }, [isOpen, prefillEmail]);
 
     // Keyboard nav
     useEffect(() => {
@@ -196,12 +183,9 @@ const LeadCaptureModal = ({ isOpen, onClose, triggerAction = 'General Inquiry', 
 
     const handleNext = async () => {
         if (!canProceed()) return;
-        // Save progress to session after each step
-        saveLeadData(data);
         if (step === 4) {
             setIsSubmitting(true);
             await sendLeadEmail(data, triggerAction, triggerPage, caseStudyName);
-            markLeadSubmitted();
             setIsSubmitting(false);
             setStep(5);
         } else {
@@ -221,6 +205,7 @@ const LeadCaptureModal = ({ isOpen, onClose, triggerAction = 'General Inquiry', 
             {/* Modal */}
             <div
                 className="relative w-full max-w-[600px] max-h-[90vh] overflow-y-auto bg-gradient-to-br from-[#0a0e17] to-[#111827] border border-[#00e5ff]/20 rounded-2xl shadow-[0_0_60px_rgba(0,229,255,0.1)]"
+                style={{ overscrollBehavior: 'contain' }}
                 onClick={(e) => e.stopPropagation()}
             >
                 {/* Progress bar */}
@@ -368,9 +353,9 @@ const LeadCaptureModal = ({ isOpen, onClose, triggerAction = 'General Inquiry', 
                                     />
                                     <span className="text-gray-400 text-xs leading-relaxed">
                                         By submitting, I agree to the{' '}
-                                        <a href="/terms" target="_blank" className="text-[#00f0ff] hover:underline">Terms of Service</a>{' '}
+                                        <a href="/#/terms-of-service" target="_blank" rel="noopener noreferrer" className="text-[#00f0ff] hover:underline">Terms of Service</a>{' '}
                                         and{' '}
-                                        <a href="/privacy" target="_blank" className="text-[#00f0ff] hover:underline">Privacy Policy</a>.
+                                        <a href="/#/privacy-policy" target="_blank" rel="noopener noreferrer" className="text-[#00f0ff] hover:underline">Privacy Policy</a>.
                                     </span>
                                 </label>
                             </div>
