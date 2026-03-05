@@ -6,7 +6,6 @@ import {
   Shield,
   Package,
   Building2,
-  Check,
   Layers,
   Activity,
   Gamepad2,
@@ -18,7 +17,6 @@ import {
   Fingerprint,
   Brain,
   Megaphone,
-  BarChart3,
 } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -267,58 +265,22 @@ const Solutions = () => {
           })}
         </div>
 
-        {/* B2B Comparison Section */}
+        {/* BI Differentiator CTA */}
         <div className="b2b-section mb-20">
-          <div className="bg-gradient-to-r from-[#1a1a24] to-[#0f0f14] border border-gray-800 rounded-2xl p-8">
-            <div className="text-center mb-8">
-              <h3 className="font-display text-2xl font-bold mb-2">
-                Already Using BI? <span className="text-[#00f0ff]">FalconDive Goes Further.</span>
-              </h3>
-              <p className="text-gray-400 text-sm">
-                We don't replace your BI. We add the AI-driven action layer it lacks.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Traditional BI */}
-              <div className="bg-[#0a0a0f] border border-gray-800 rounded-xl p-6">
-                <div className="flex items-center gap-3 mb-4">
-                  <BarChart3 className="w-5 h-5 text-gray-500" />
-                  <h4 className="font-display font-bold text-gray-400">Traditional BI</h4>
-                </div>
-                <ul className="space-y-3">
-                  {['Passive analytics & dashboards', 'Manual report generation', 'Reactive issue identification', 'Insights without action paths'].map((item, i) => (
-                    <li key={i} className="flex items-center gap-2 text-sm text-gray-500">
-                      <span className="text-gray-600">—</span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* FalconDive */}
-              <div className="bg-gradient-to-br from-[#00f0ff]/10 to-blue-500/5 border border-[#00f0ff]/30 rounded-xl p-6">
-                <div className="flex items-center gap-3 mb-4">
-                  <Layers className="w-5 h-5 text-[#00f0ff]" />
-                  <h4 className="font-display font-bold text-[#00f0ff]">FalconDive Layer</h4>
-                </div>
-                <ul className="space-y-3">
-                  {['Active decision intelligence', 'AI-driven actions & closure', 'Proactive leakage detection', 'End-to-end value realization'].map((item, i) => (
-                    <li key={i} className="flex items-center gap-2 text-sm text-gray-300">
-                      <Check className="w-4 h-4 text-[#00f0ff]" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-
-            <div className="mt-6 text-center">
-              <p className="text-gray-500 text-sm">
-                <span className="text-[#00f0ff]">B2B:</span> Uplift margins across affiliates, payments, and betting verticals.{' '}
-                <span className="text-[#00f0ff]">B2C:</span> Purpose-built value realization for direct operations.
-              </p>
-            </div>
+          <div className="bg-gradient-to-r from-[#1a1a24] to-[#0f0f14] border border-gray-800 rounded-2xl p-8 text-center">
+            <h3 className="font-display text-2xl font-bold mb-3">
+              Already Using BI? <span className="text-[#00f0ff]">FalconDive Goes Further.</span>
+            </h3>
+            <p className="text-gray-400 text-sm mb-6 max-w-2xl mx-auto">
+              We don't replace your BI. We add the AI-driven action layer it lacks — from passive dashboards to proactive leakage detection and end-to-end value realization.
+            </p>
+            <a
+              href="/#/pricing"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-[#00f0ff]/10 border border-[#00f0ff]/40 text-[#00f0ff] font-mono text-sm hover:bg-[#00f0ff]/20 transition-all rounded-lg"
+            >
+              See Full Comparison & Pricing
+              <span className="text-lg">→</span>
+            </a>
           </div>
         </div>
 
