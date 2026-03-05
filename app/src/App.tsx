@@ -51,6 +51,9 @@ const ScrollToTop = () => {
     // Kill every ScrollTrigger so sections re-create them fresh
     ScrollTrigger.getAll().forEach(st => st.kill());
 
+    // Check if there's a pending anchor scroll target
+    const pendingTarget = (window as Window & { __pendingScrollTarget?: string }).__pendingScrollTarget;
+
     // Destroy Lenis first — it intercepts all scroll methods
     const lenis = (window as Window & { __lenis?: Lenis }).__lenis;
     if (lenis) {
@@ -58,20 +61,47 @@ const ScrollToTop = () => {
       (window as Window & { __lenis?: Lenis }).__lenis = undefined;
     }
 
-    // Force scroll to top synchronously (before paint)
-    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
+    if (!pendingTarget) {
+      // No anchor target — force scroll to top synchronously (before paint)
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    }
   }, [pathname]);
 
   // Separate useEffect for async tasks (delayed scroll fallback & ScrollTrigger refresh)
   useEffect(() => {
-    // Post-paint scroll reset fallback
-    requestAnimationFrame(() => {
-      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-      document.documentElement.scrollTop = 0;
-      document.body.scrollTop = 0;
-    });
+    const pendingTarget = (window as Window & { __pendingScrollTarget?: string }).__pendingScrollTarget;
+
+    if (pendingTarget) {
+      // Clear the flag immediately so it doesn't persist
+      (window as Window & { __pendingScrollTarget?: string }).__pendingScrollTarget = undefined;
+
+      // Poll for the element — it needs time for the homepage to render and Lenis to init
+      const tryScroll = (attempts: number) => {
+        const element = document.getElementById(pendingTarget);
+        if (element) {
+          // Try using Lenis first for smooth scroll
+          const lenis = (window as Window & { __lenis?: any }).__lenis;
+          if (lenis) {
+            lenis.scrollTo(element, { offset: -80 });
+          } else {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        } else if (attempts > 0) {
+          setTimeout(() => tryScroll(attempts - 1), 100);
+        }
+      };
+      // Start polling after a short delay to let the homepage mount
+      setTimeout(() => tryScroll(30), 200);
+    } else {
+      // Post-paint scroll reset fallback
+      requestAnimationFrame(() => {
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+      });
+    }
 
     // Allow the new page's effects to create their ScrollTriggers, then refresh
     const refreshTimer = setTimeout(() => ScrollTrigger.refresh(), 150);

@@ -37,23 +37,21 @@ const Navigation = () => {
     if (link.isAnchor) {
       e.preventDefault();
       const targetId = link.href.replace('#', '');
+
       if (!isHomePage) {
-        // Navigate to home first, then poll for the section to appear
+        // Signal to ScrollToTop: do NOT reset scroll — we have a target
+        (window as Window & { __pendingScrollTarget?: string }).__pendingScrollTarget = targetId;
         navigate('/');
-        const tryScroll = (attempts: number) => {
-          const element = document.getElementById(targetId);
-          if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
-          } else if (attempts > 0) {
-            setTimeout(() => tryScroll(attempts - 1), 100);
-          }
-        };
-        setTimeout(() => tryScroll(20), 100); // try for up to 2 seconds
       } else {
-        // On home page - scroll to section directly
+        // Already on homepage — scroll directly
         const element = document.getElementById(targetId);
         if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
+          const lenis = (window as Window & { __lenis?: any }).__lenis;
+          if (lenis) {
+            lenis.scrollTo(element, { offset: -80 });
+          } else {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
         }
       }
       setIsMobileMenuOpen(false);
